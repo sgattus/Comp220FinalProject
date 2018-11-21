@@ -3,6 +3,8 @@
 #include<stdio.h>
 #include "LibraryMap.h"
 #include "Song.h"
+#include "PlayListMap.h"
+#include "UserInterFace.h"
     using namespace std;
     int main()
     {

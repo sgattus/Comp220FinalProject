@@ -14,6 +14,27 @@ private:
     int size;
 
 
+
+        /**
+     * •	Save the current library when program execution terminates (quit command).
+    *Restore the current inventory items when program execution begins again.
+
+     */
+    void save();
+    void restor();
+
+
+    /**
+    * •	add songs to the library (import).
+    */
+
+    void import();
+
+    /**
+    * •	remove songs from the library (discontinue).
+    */
+    void discountinue();
+
 //
 public:
     /**
@@ -32,30 +53,36 @@ public:
 
 
     //Destructor
-    ~LinkedListMap();
+    ~LibraryMap();
 
     /**
-   * @post if the key is new, the key-value pair is added to the map
-   *       if the key was already present, the new value overwrites the old value
+   * @post if the song is new, the song-value pair is added to the map
+   *       if the song was already present, the new value overwrites the old value
    *       (i.e., the new value will be returned by get instead of the old value)
    */
     void put(const T& value);
+
+
 
     /**
      * @return the value associated with the given key
      * @throws std::invalid_argument if the key is not present
      */
-    T get(std::string name);
+
+
+    T get(std::string songName);
 
     /**
-     * @return true if the given key is associated with a value in the map, false otherwise
+     * @return true if the given song is associated with a value in the map, false otherwise
      */
-    bool containsKey(std::string name);
+    bool containsKey(std::string songName);
 
     /**
-     * Display all songs from library in alphabetical order
+     * Display all songs in alphabetical order by artist (within artist alphabetical by song)
      */
-    void display();
+    std::string display();
+
+
 
 
 };
