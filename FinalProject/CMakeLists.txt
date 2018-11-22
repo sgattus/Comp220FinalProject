@@ -3,4 +3,4 @@ project(FinalProject)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(FinalProject main.cpp Song.cpp)
+add_executable(FinalProject main.cpp Song.cpp UserInterFace.cpp)
