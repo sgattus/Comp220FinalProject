@@ -8,6 +8,7 @@
     using namespace std;
     int main()
     {
+        //Hey there
         char str[5][20], t[20];
         int i, j;
         cout<<"\n Enter Any Five Names : \n\n";
