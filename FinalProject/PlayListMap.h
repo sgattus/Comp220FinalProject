@@ -5,17 +5,16 @@
 #include "LinkedNode.h"
 #include "Map.h"
 #include "LibraryMap.h"
-#include "List.h"
 #include "PlayList.h"
 #include "RandomPlayList.h"
 
 template <class T>
-class PlayListMap: public Map<T> {
+class PlayListMap: public Map<T>{
 private:
-    LinkedNode<T> *head;
-    LinkedNode<T>  *end;
+    LinkedNode<Playlist> *head;
+    LinkedNode<Playlist>  *end;
     //acess to the library
-    LibraryMap<T> *libray;
+    LibraryMap<Song> *libray;
 
     int size;
 
@@ -26,13 +25,13 @@ public:
      * Constructor
      */
 
-    PlayListMap(LibraryMap<T> library);
+    PlayListMap();
 
     //Copy Constructor
-    PlayListMap(const PlayListMap<T>& PlayListMapToCopy);
-
-    //Assignment Operator
-    PlayListMap<T>& operator=(const PlayListMap<T>& PlayListMapToCopy);
+//    PlayListMap(const PlayListMap<T>& PlayListMapToCopy);
+//
+//    //Assignment Operator
+//    PlayListMap<T>& operator=(const PlayListMap<T>& PlayListMapToCopy);
 
 
 
@@ -40,27 +39,25 @@ public:
 
 
     //Destructor
-    ~PlayListMap();
+   // ~PlayListMap();
 
     /**
    *Add Play List to map of playlists
    */
-    void put(const List<T>& value);
 
-    /**
-     * •	add a new random playlist (newrandom)
-     */
+    void setLibrary(LibraryMap<Song> lib);
+    void put(Playlist& value);
 
-    void putRand(int duration);
+    //Might Not Need this
+//    /**
+//     * •	add a new random playlist (newrandom)
+//     */
+//
+//    void putRand(int duration);
 
-    /**
-     *Add the given song to the end of the given playlist
-     * Use this.get to find playlist
-     * Use library.find to find song from library
-     *Use playlist add song to end of playlist
-     */
 
-    void add(std::string name, std::string artist, std::string title);
+    void add(Song song, std::string name);
+
 
     /**
       *remove the given song from given playlist
@@ -75,7 +72,7 @@ public:
     * @return the value associated with the given name
     * @throws std::invalid_argument if the name is not present
     */
-    List<T> get(std::string name);
+    Playlist get(std::string name);
 
     /**
      * @return true if the given name is associated with a value in the map, false otherwise
@@ -96,6 +93,7 @@ public:
      /**
       * Remove PlayList When empty (becomes empty from deletion after playnext)
       */
+      void removePlayList(std::string name);
 
 
 

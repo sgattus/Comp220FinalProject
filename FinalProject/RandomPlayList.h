@@ -4,13 +4,13 @@
 #include <string>
 #include "LinkedNode.h"
 #include "Song.h"
-#include "List.h"
+#include "PlayList.h"
 
-template <class T>
-class RandomPlaylist:public List<T> {
+
+class RandomPlaylist:public Playlist {
 private:
-    LinkedNode<T> *head;
-    LinkedNode<T>  *end;
+    LinkedNode<Song> *head;
+    LinkedNode<Song>  *end;
     std::string name;
     int duration;
 
@@ -23,8 +23,8 @@ public:
      * @param duration
      */
     RandomPlaylist(std::string name, int duration);
-    RandomPlaylist(const RandomPlaylist<T>& playlistToCopy);
-    RandomPlaylist<T>& operator=(const RandomPlaylist<T>& playlistToCopy);
+    RandomPlaylist(const RandomPlaylist& playlistToCopy);
+    RandomPlaylist& operator=(const RandomPlaylist& playlistToCopy);
     void addSongToEnd(Song songToAdd);
     void remove(Song songToRemove);
     /**
@@ -52,12 +52,13 @@ public:
     /**
      *
      */
+     std::string getName();
 
 
 
 };
 
-#include "RandomPlayList.inl"
+
 
 
 #endif //PLAYLIST_H
