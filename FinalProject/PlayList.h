@@ -24,6 +24,13 @@ class Playlist {
         Song getSong(std::string title);
 
         /**
+         * These are commited out for my test to run since they do not have definitions yet
+         * Go ahead and COMMENT out my test in main and make your own to implement these
+         * Please do not edit addSongToEnd, remove, and getSong unless you talk to me
+         * Same with constructor
+         */
+
+        /**
         * Display all the names of the playlist and their durations
         * •	return a string representing all songs in the playlist
         */
