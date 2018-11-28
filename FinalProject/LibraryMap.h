@@ -53,7 +53,7 @@ public:
 
 
     //Destructor
-    //~LibraryMap();
+    ~LibraryMap();
 
     /**
    * @post if the song is new, the song-value pair is added to the map

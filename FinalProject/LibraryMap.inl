@@ -15,6 +15,75 @@ LibraryMap<T>::LibraryMap(){
 }
 
 template <class T>
+LibraryMap<T>::LibraryMap(const LibraryMap<T> &LibraryMapToCopy) {
+    size=0;
+    head= nullptr;
+    end= nullptr;
+    LinkedNode<T>* temp= LibraryMapToCopy.head;
+    while(temp!= nullptr){
+        T newItem=T (temp->getItem());
+        this->put(newItem);
+        temp=temp->getNext();
+    }
+
+    temp= nullptr;
+
+}
+
+template <class T>
+LibraryMap<T>& LibraryMap<T>::operator=(const LibraryMap<T>& LibraryMapToCopy){
+    if(this!= &LibraryMapToCopy){
+
+        while(head!= nullptr){
+
+            LinkedNode<T>* temp=head;
+            head = head->getNext();
+            delete temp;
+
+            size=size-1;
+
+
+
+
+        }
+
+        head= nullptr;
+        end= nullptr;
+        size=0;
+        LinkedNode<T>* temp= LibraryMapToCopy.head;
+        while(temp!= nullptr){
+            T newItem=T (temp->getItem());
+            this->put(newItem);
+            temp=temp->getNext();
+        }
+
+    }
+
+    return* this;
+}
+
+template <class T>
+LibraryMap<T>::~LibraryMap(){
+    while(head!= nullptr){
+
+        LinkedNode<T>* temp=head;
+        head = head->getNext();
+        delete temp;
+
+        size=size-1;
+        temp= nullptr;
+
+
+
+
+    }
+
+    head= nullptr;
+    end= nullptr;
+
+}
+
+template <class T>
 void LibraryMap<T>::put(T& value){
     LinkedNode<T>* newNode=new LinkedNode<T>();
     newNode->setItem(value);
