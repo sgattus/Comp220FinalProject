@@ -56,7 +56,7 @@ public:
 //    void putRand(int duration);
 
 
-    void add(Song song, std::string name);
+    void add(std::string name, std::string artist, std::string title);
 
 
     /**

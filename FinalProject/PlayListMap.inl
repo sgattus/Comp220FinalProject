@@ -60,26 +60,23 @@ void PlayListMap<T>::setLibrary(LibraryMap<Song> lib){
    */
 template <class T>
 void PlayListMap<T>::remove(std::string name, std::string artist, std::string title){
-    if(this->containsKey(name)==true){
-        if(libray->containsKey(title)==true){
-            this->get(name).remove(libray->get(title));
-        }
-        else{
-            //change to exception
-            cout<<"song not in library"<<endl;
-        }
 
-    }
-    else{
-        //change to exception
-        cout<<"playlist does not exsist"<<endl;
-    }
+            Song song=libray->get(title);
+            Playlist playlist = this->get(name);
+            playlist.remove(song);
+
+            this->put(playlist);
+
 
 }
 
 template <class T>
-void PlayListMap<T>::add(Song song,std::string name){
-    this->get(name).addSongToEnd(song);
+void PlayListMap<T>::add(std::string name, std::string artist, std::string title){
+    Song song=libray->get(title);
+    Playlist playlist = this->get(name);
+    playlist.addSongToEnd(song);
+
+    this->put(playlist);
 
 }
 

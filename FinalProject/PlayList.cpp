@@ -43,7 +43,10 @@ void Playlist::remove(Song songToRemove){
         if(temp->getItem().getTitle()==songToRemove.getTitle()){
             temp= nullptr;
         }
-        count +=1;
+        else {
+            count += 1;
+            temp = temp->getNext();
+        }
     }
     int i = 0;
     temp=head;
@@ -73,4 +76,6 @@ Song Playlist::getSong(std::string title) {
         }
         temp=temp->getNext();
     }
+
+
 }

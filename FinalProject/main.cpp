@@ -135,15 +135,14 @@ void PlayListMapTest()
     playlist2.addSongToEnd(song1);
     p->put(playlist2);
     printAssertEquals(song1.getTitle(),p->get("sonya").getSong(song1.getTitle()).getTitle());
-    playlist2 = p->get("sonya");
-    playlist2.addSongToEnd(song2);
-
-    p->put(playlist2);
+//    playlist2 = p->get("sonya");
+//    playlist2.addSongToEnd(song2);
+//
+//    p->put(playlist2);
+    p->add("sonya", song2.getArtist(), song2.getTitle());
     printAssertEquals(song2.getTitle(),p->get("sonya").getSong(song2.getTitle()).getTitle());
-
-
-
-
+    p->remove("sonya",song2.getArtist(),song2.getTitle());
+    printAssertEquals(song2.getTitle(),p->get("sonya").getSong(song2.getTitle()).getTitle());
 
 
 
