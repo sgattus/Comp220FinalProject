@@ -61,9 +61,9 @@ T LibraryMap<T>::get(std::string songName){
     }
     temp = nullptr;
     //} else {
-    if(head== nullptr){
+    if(this->containsKey(songName)==false){
 
-        throw std::invalid_argument("Key not present");
+        throw std::invalid_argument("Song is not present");
 
 
     }
@@ -177,7 +177,6 @@ std::string LibraryMap<T>::display() {
             //check if duplicate artist is in artist array
             artistBefore = art[i];
         }
-
 
     }
     return songs;
