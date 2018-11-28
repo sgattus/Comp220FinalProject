@@ -11,6 +11,28 @@ Song::Song(std::string artistIn, std::string titleIn, int durationIn){
     playcount=0;
 }
 
+Song::Song(const Song& songToCopy){
+    artist=songToCopy.artist;
+    title=songToCopy.title;
+    duration=songToCopy.duration;
+    playcount=songToCopy.playcount;
+
+}
+
+Song& Song::operator=(const Song& songToCopy){
+    if(this!= &songToCopy){
+        artist=songToCopy.artist;
+        title=songToCopy.title;
+        duration=songToCopy.duration;
+        playcount=songToCopy.playcount;
+    }
+    return* this;
+}
+
+Song::~Song(){
+
+}
+
 std::string Song::getArtist() {
     return artist;
 }

@@ -19,7 +19,7 @@ public:
      *       if the key was already present, the new value overwrites the old value
      *       (i.e., the new value will be returned by get instead of the old value)
      */
-    virtual void put(const T& value) =0;
+    virtual void put(T& value) =0;
 
     /*
      * @return the value associated with the given key

@@ -13,11 +13,13 @@ private:
     int playcount;
 
 
+
+
+public:
     Song(const Song& songToCopy);
     Song& operator=(const Song& songToCopy);
     ~Song();
 
-public:
     Song(std::string artistIn,std::string titleIn, int durationIn);
 
     std::string getArtist();

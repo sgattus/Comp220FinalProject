@@ -53,14 +53,14 @@ public:
 
 
     //Destructor
-    ~LibraryMap();
+    //~LibraryMap();
 
     /**
    * @post if the song is new, the song-value pair is added to the map
    *       if the song was already present, the new value overwrites the old value
    *       (i.e., the new value will be returned by get instead of the old value)
    */
-    void put(const T& value);
+    void put(T& value);
 
 
 
