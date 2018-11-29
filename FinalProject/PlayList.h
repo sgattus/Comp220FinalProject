@@ -5,6 +5,7 @@
 #include "LinkedNode.h"
 #include "Song.h"
 
+
 class Playlist {
     private:
         LinkedNode<Song> *head;
