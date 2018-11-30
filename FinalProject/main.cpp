@@ -10,6 +10,7 @@
 
 void LibraryMapTest()
 {
+    //hey there
     cout<<"LibraryMapTest: "<<endl;
 
     LibraryMap<Song> *library = new LibraryMap<Song>();
