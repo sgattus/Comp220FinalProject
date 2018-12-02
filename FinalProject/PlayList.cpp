@@ -112,6 +112,7 @@ Song Playlist::getSong(std::string title) {
         LinkedNode<Song>* temp= head;
         head=head->getNext();
         Song* song=temp->getItem();
+        size -=1;
         delete temp;
         return *song;
 
