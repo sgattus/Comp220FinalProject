@@ -6,6 +6,8 @@
 #include "PlayListMap.h"
 #include "UserInterFace.h"
 #include "TestLib.h"
+#include "RandomPlayList.h"
+
     using namespace std;
 
 void LibraryMapTest()
@@ -148,17 +150,27 @@ void PlayListMapTest()
 
     std::cout << "--done--" << std::endl;
 }
+
+void randomPlaylistTest(){
+//    List* p1= new RandomPlaylist("My Faves", 100000);
+//    p1->calcDuration();
+//    printAssertEquals(1955, p1->getDuration());
+
+}
+
+
 int main()
     {
 
-    LibraryMapTest();
-    testLibraryCopyConstructor();
-    testLibraryAssignmentOperator();
-    PlayListMapTest();
+//    LibraryMapTest();
+//    testLibraryCopyConstructor();
+//    testLibraryAssignmentOperator();
+//    PlayListMapTest();
+
+//    randomPlaylistTest();
     cout<<"--testDone--"<<endl;
 
 
 
     return 0;
-
 }
