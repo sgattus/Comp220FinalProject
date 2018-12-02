@@ -8,8 +8,8 @@
 template <class T>
 class LibraryMap: public Map<T> {
 private:
-    LinkedNode<T> *head;
-    LinkedNode<T>  *end;
+    LinkedNode<Song> *head;
+    LinkedNode<Song>  *end;
 
     int size;
 
@@ -60,7 +60,7 @@ public:
    *       if the song was already present, the new value overwrites the old value
    *       (i.e., the new value will be returned by get instead of the old value)
    */
-    void put(T& value);
+    void put(Song& value);
 
 
 
@@ -70,7 +70,7 @@ public:
      */
 
 
-    T get(std::string songName);
+    Song* get(std::string songName);
 
     /**
      * @return true if the given song is associated with a value in the map, false otherwise

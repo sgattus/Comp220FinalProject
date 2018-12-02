@@ -15,19 +15,19 @@ PlayListMap<T>::PlayListMap() {
 }
 
 template <class T>
-void PlayListMap<T>::put(Playlist& value){
-    LinkedNode<Playlist>* newNode=new LinkedNode<Playlist>();
-    newNode->setItem(value);
+void PlayListMap<T>::put(List& value){
+    LinkedNode<List>* newNode=new LinkedNode<List>();
+    newNode->setItem(&value);
     if(head== nullptr){
         head = newNode;
         end = newNode;
         size +=1;
     }
     else if(this->containsKey(value.getName())==true){
-        LinkedNode<Playlist>* temp=head;
+        LinkedNode<List>* temp=head;
         for(int i=0; i<size; i++){
-            if(temp->getItem().getName()==value.getName()) {
-                temp->setItem(value);
+            if(temp->getItem()->getName()==value.getName()) {
+                temp->setItem(&value);
             }
             else{
                 temp=temp->getNext();
@@ -52,39 +52,14 @@ void PlayListMap<T>::setLibrary(LibraryMap<Song> lib){
 }
 
 
-/**
-    *remove the given song from given playlist
-   * Use this.get to find playlist
-   *
-   *Use playlist remove song from given playlist
-   */
-template <class T>
-void PlayListMap<T>::remove(std::string name, std::string artist, std::string title){
-
-            Song song=libray->get(title);
-            Playlist playlist = this->get(name);
-            playlist.remove(song);
-
-            this->put(playlist);
 
 
-}
 
 template <class T>
-void PlayListMap<T>::add(std::string name, std::string artist, std::string title){
-    Song song=libray->get(title);
-    Playlist playlist = this->get(name);
-    playlist.addSongToEnd(song);
-
-    this->put(playlist);
-
-}
-
-template <class T>
-Playlist PlayListMap<T>::get(std::string name){
-    LinkedNode<Playlist> *temp = head;
+List* PlayListMap<T>::get(std::string name){
+    LinkedNode<List> *temp = head;
     for (int i = 0; i < size; i++) {
-        if (temp->getItem().getName()==name) {
+        if (temp->getItem()->getName()==name) {
             return temp->getItem();
         } else {
             temp = temp->getNext();
@@ -103,10 +78,10 @@ Playlist PlayListMap<T>::get(std::string name){
 template <class T>
 bool PlayListMap<T>::containsKey(std::string name){
 
-    LinkedNode<T>* temp=head;
+    LinkedNode<List>* temp=head;
     bool isKeyed;
     for(int i=0; i<size; i++){
-        if(temp->getItem().getName()==name) {
+        if(temp->getItem()->getName()==name) {
             isKeyed=true;
             i=size;
         }

@@ -19,10 +19,10 @@ LibraryMap<T>::LibraryMap(const LibraryMap<T> &LibraryMapToCopy) {
     size=0;
     head= nullptr;
     end= nullptr;
-    LinkedNode<T>* temp= LibraryMapToCopy.head;
+    LinkedNode<Song>* temp= LibraryMapToCopy.head;
     while(temp!= nullptr){
-        T newItem=T (temp->getItem());
-        this->put(newItem);
+        T* newItem= new T (temp->getItem()->getArtist(),temp->getItem()->getTitle(),temp->getItem()->getDuration());
+        this->put(*newItem);
         temp=temp->getNext();
     }
 
@@ -36,7 +36,7 @@ LibraryMap<T>& LibraryMap<T>::operator=(const LibraryMap<T>& LibraryMapToCopy){
 
         while(head!= nullptr){
 
-            LinkedNode<T>* temp=head;
+            LinkedNode<Song>* temp=head;
             head = head->getNext();
             delete temp;
 
@@ -50,10 +50,10 @@ LibraryMap<T>& LibraryMap<T>::operator=(const LibraryMap<T>& LibraryMapToCopy){
         head= nullptr;
         end= nullptr;
         size=0;
-        LinkedNode<T>* temp= LibraryMapToCopy.head;
+        LinkedNode<Song>* temp= LibraryMapToCopy.head;
         while(temp!= nullptr){
-            T newItem=T (temp->getItem());
-            this->put(newItem);
+            Song* newItem= new Song (temp->getItem()->getArtist(),temp->getItem()->getTitle(),temp->getItem()->getDuration());
+            this->put(*newItem);
             temp=temp->getNext();
         }
 
@@ -84,9 +84,9 @@ LibraryMap<T>::~LibraryMap(){
 }
 
 template <class T>
-void LibraryMap<T>::put(T& value){
+void LibraryMap<T>::put(Song& value){
     LinkedNode<T>* newNode=new LinkedNode<T>();
-    newNode->setItem(value);
+    newNode->setItem(&value);
     if(head== nullptr){
         head = newNode;
         end = newNode;
@@ -95,8 +95,8 @@ void LibraryMap<T>::put(T& value){
     else if(this->containsKey(value.getTitle())==true){
         LinkedNode<T>* temp=head;
         for(int i=0; i<size; i++){
-            if(temp->getItem().getTitle()==value.getTitle()) {
-                temp->setItem(value);
+            if(temp->getItem()->getTitle()==value.getTitle()) {
+                temp->setItem(&value);
             }
             else{
                 temp=temp->getNext();
@@ -119,10 +119,11 @@ void LibraryMap<T>::put(T& value){
 }
 
 template <class T>
-T LibraryMap<T>::get(std::string songName){
-    LinkedNode<T> *temp = head;
+Song* LibraryMap<T>::get(std::string songName){
+    LinkedNode<Song> *temp = head;
     for (int i = 0; i < size; i++) {
-        if (temp->getItem().getTitle()==songName) {
+        std::string hihih=temp->getItem()->getTitle();
+        if (temp->getItem()->getTitle()==songName) {
             return temp->getItem();
         } else {
             temp = temp->getNext();
@@ -144,7 +145,7 @@ bool LibraryMap<T>::containsKey(std::string songName){
     LinkedNode<T>* temp=head;
     bool isKeyed;
     for(int i=0; i<size; i++){
-        if(temp->getItem().getTitle()==songName) {
+        if(temp->getItem()->getTitle()==songName) {
             isKeyed=true;
             i=size;
         }
@@ -171,7 +172,7 @@ std::string LibraryMap<T>::display() {
     //go through map to add artist to array
     for(i=0; i<size; i++)
     {
-        strcpy(art[i], temp->getItem().getArtist().c_str());
+        strcpy(art[i], temp->getItem()->getArtist().c_str());
 
         temp=temp->getNext();
     }
@@ -215,9 +216,9 @@ std::string LibraryMap<T>::display() {
             // go through Map to get songs from specific artist
             for (int p = 0; p < size; p++) {
                 //Check if song is from specific artist
-                if (temp->getItem().getArtist() == art[i]) {
+                if (temp->getItem()->getArtist() == art[i]) {
                     //if so add to song array
-                    strcpy(song[count], temp->getItem().getTitle().c_str());
+                    strcpy(song[count], temp->getItem()->getTitle().c_str());
                     count += 1;
                 }
                 temp = temp->getNext();

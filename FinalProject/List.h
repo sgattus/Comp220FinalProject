@@ -4,16 +4,19 @@
 
 #include <stdexcept>
 #include <string>
+#include "Song.h"
 
 class List {
 private:
     //Private to disable copying and assigning from outside class, don't implement these methods
-    List(const List& listToCopy);
-    List& operator=(const List& listToCopy);
+
 
 public:
     //constructor
     List() {}
+
+//    List(const List& listToCopy);
+//    virtual List& operator=(const List& listToCopy)=0;
 
     //Destructor
     virtual ~List() {}
@@ -26,10 +29,15 @@ public:
     */
      virtual std::string display()=0;
 
+
     /**
     *calculate the duration of the playlist
     */
     virtual void calcDuration()=0;
+
+    virtual Song getSong(std::string title)=0;
+
+
 
     /**
    *play next song, returning song info and removing it from playlist (playnext)

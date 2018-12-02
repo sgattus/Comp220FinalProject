@@ -25,7 +25,7 @@ public:
      * @return the value associated with the given key
      * @throws std::invalid_argument if the key is not present
      */
-    virtual T get(std::string name) =0;
+    virtual T* get(std::string name) =0;
 
     /*
      * @return true if the given key is associated with a value in the map, false otherwise

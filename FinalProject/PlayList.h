@@ -4,9 +4,10 @@
 #include <string>
 #include "LinkedNode.h"
 #include "Song.h"
+#include "List.h"
 
 
-class Playlist {
+class Playlist: public List {
     private:
         LinkedNode<Song> *head;
         LinkedNode<Song>  *end;
@@ -17,6 +18,7 @@ class Playlist {
 
     public:
         Playlist(std::string name);
+
 //        Playlist(const Playlist& playlistToCopy);
 //        Playlist<T>& operator=(const Playlist<T>& playlistToCopy);
         ~Playlist();
@@ -37,23 +39,23 @@ class Playlist {
         */
 
         //Committed out for testing purposes
-//        std::string display();
-//
-//        /**
-//        *calculate the duration of the playlist
-//        */
-//         void calcDuration();
-//
-//         /**
-//        *play next song, returning song info and removing it from playlist (playnext)
-//          * Through exception if no more songs
-//         **/
-//         Song playNextSong();
-//
-//         /**
-//          * •	check if empty
-//          */
-//          bool isEmpty();
+        std::string display();
+
+        /**
+        *calculate the duration of the playlist
+        */
+         void calcDuration();
+
+         /**
+        *play next song, returning song info and removing it from playlist (playnext)
+          * Through exception if no more songs
+         **/
+         Song playNextSong();
+
+         /**
+          * •	check if empty
+          */
+          bool isEmpty();
 
           /**
            *

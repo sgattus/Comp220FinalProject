@@ -23,8 +23,8 @@ void LibraryMapTest()
     library->put(song3);
     library->put(song4);
     cout << "LibraryMap.put, LibraryMap.containsKey and LibraryMap.get Test: " << endl;
-    printAssertEquals("Box of Rain", library->get("Box of Rain").getTitle());
-    printAssertEquals("Land Down Under", library->get("Land Down Under").getTitle());
+    printAssertEquals("Box of Rain", library->get("Box of Rain")->getTitle());
+    printAssertEquals("Land Down Under", library->get("Land Down Under")->getTitle());
     try {
         library->get("nothing");
         std::cout << "FAIL: get did not throw exception" << std::endl;
@@ -52,12 +52,12 @@ void testLibraryCopyConstructor(){
     LibraryToTest.put(song2);
 
     LibraryMap<Song> copyMap= LibraryMap<Song> (LibraryToTest);
-    printAssertEquals("Box of Rain", copyMap.get("Box of Rain").getTitle());
-    printAssertEquals("That's All", copyMap.get("That's All").getTitle());
+    printAssertEquals("Box of Rain", copyMap.get("Box of Rain")->getTitle());
+    printAssertEquals("That's All", copyMap.get("That's All")->getTitle());
     copyMap.put(song3);
     LibraryToTest.put(song4);
-    printAssertEquals("Land Down Under", copyMap.get("Land Down Under").getTitle());
-    printAssertEquals("Brown Eyed Women", LibraryToTest.get("Brown Eyed Women").getTitle());
+    printAssertEquals("Land Down Under", copyMap.get("Land Down Under")->getTitle());
+    printAssertEquals("Brown Eyed Women", LibraryToTest.get("Brown Eyed Women")->getTitle());
     cout<<"--done--"<<endl;
 
 }
@@ -75,12 +75,12 @@ void testLibraryAssignmentOperator(){
 
     LibraryMap<Song> copyMap;
     copyMap= LibraryToTest;
-    printAssertEquals("Box of Rain", copyMap.get("Box of Rain").getTitle());
-    printAssertEquals("That's All", copyMap.get("That's All").getTitle());
+    printAssertEquals("Box of Rain", copyMap.get("Box of Rain")->getTitle());
+    printAssertEquals("That's All", copyMap.get("That's All")->getTitle());
     copyMap.put(song3);
     LibraryToTest.put(song4);
-    printAssertEquals("Land Down Under", copyMap.get("Land Down Under").getTitle());
-    printAssertEquals("Brown Eyed Women", LibraryToTest.get("Brown Eyed Women").getTitle());
+    printAssertEquals("Land Down Under", copyMap.get("Land Down Under")->getTitle());
+    printAssertEquals("Brown Eyed Women", LibraryToTest.get("Brown Eyed Women")->getTitle());
     cout<<"--done--"<<endl;
 
 }
@@ -99,8 +99,8 @@ void PlayListMapTest()
     library->put(song3);
     library->put(song4);
     cout << "LibraryMap.put, LibraryMap.containsKey and LibraryMap.get Test: " << endl;
-    printAssertEquals("Box of Rain", library->get("Box of Rain").getTitle());
-    printAssertEquals("Land Down Under", library->get("Land Down Under").getTitle());
+    printAssertEquals("Box of Rain", library->get("Box of Rain")->getTitle());
+    printAssertEquals("Land Down Under", library->get("Land Down Under")->getTitle());
     try {
         library->get("nothing");
         std::cout << "FAIL: get did not throw exception" << std::endl;
@@ -115,34 +115,46 @@ void PlayListMapTest()
             library->display());
 
 
-    PlayListMap<Playlist>* p = new PlayListMap<Playlist>();
+    PlayListMap<List>* p = new PlayListMap<List>();
     p->setLibrary(*library);
-    Playlist playlist1=Playlist("playList 1");
-    p->put(playlist1);
+    List* playlist1= new Playlist("playList 1");
+    p->put(*playlist1);
     cout<<"Test PlayLisMap.get(), PlayListMap.put, and PlayListMap.containsKey: "<<endl;
-    printAssertEquals("playList 1", p->get("playList 1").getName());
+    printAssertEquals("playList 1", p->get("playList 1")->getName());
 
     //playlist1.addSongToEnd(song1);
-    Playlist p1=p->get("playList 1");
-    p1.addSongToEnd(song1);
-    p1.addSongToEnd(song2);
+    List* p1=p->get("playList 1");
+    p1->addSongToEnd(song1);
+    p1->addSongToEnd(song2);
 
 
-    printAssertEquals(song1.getTitle(),p1.getSong(song1.getTitle()).getTitle());
-    printAssertEquals(song2.getTitle(),p1.getSong(song2.getTitle()).getTitle());
+    printAssertEquals(song1.getTitle(),p1->getSong(song1.getTitle()).getTitle());
+    printAssertEquals(song2.getTitle(),p1->getSong(song2.getTitle()).getTitle());
 
-    Playlist playlist2=Playlist("sonya");
-    playlist2.addSongToEnd(song1);
-    p->put(playlist2);
-    printAssertEquals(song1.getTitle(),p->get("sonya").getSong(song1.getTitle()).getTitle());
+    List* playlist2= new Playlist("sonya");
+    //playlist2->setName("sonya");
+    playlist2->addSongToEnd(song1);
+    p->put(*playlist2);
+    printAssertEquals(song1.getTitle(),p->get("sonya")->getSong(song1.getTitle()).getTitle());
 //    playlist2 = p->get("sonya");
 //    playlist2.addSongToEnd(song2);
 //
 //    p->put(playlist2);
-    p->add("sonya", song2.getArtist(), song2.getTitle());
-    printAssertEquals(song2.getTitle(),p->get("sonya").getSong(song2.getTitle()).getTitle());
-    p->remove("sonya",song2.getArtist(),song2.getTitle());
-    printAssertEquals(song2.getTitle(),p->get("sonya").getSong(song2.getTitle()).getTitle());
+    //p->add("sonya", song2.getArtist(), song2.getTitle());
+     p->get("sonya")->addSongToEnd(song2);
+
+    printAssertEquals("That's All",p->get("sonya")->getSong("That's All").getTitle());
+    std::cout << "--done--" << std::endl;
+    p->get("sonya")->remove(song2);
+
+    try {
+        printAssertEquals("That's All",p->get("sonya")->getSong("That's All").getTitle());
+        std::cout << "FAIL: get did not throw exception" << std::endl;
+    }
+    catch (std::invalid_argument &e) {
+        printAssertEquals("Song is not present", e.what());
+    }
+
 
 
 

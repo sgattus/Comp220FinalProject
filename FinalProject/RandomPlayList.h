@@ -8,7 +8,7 @@
 #include "List.h"
 
 
-class RandomPlaylist:public List {
+class RandomPlaylist: public List {
 private:
     LinkedNode<Song> *head;
     LinkedNode<Song>  *end;

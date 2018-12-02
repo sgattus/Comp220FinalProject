@@ -25,8 +25,8 @@ LinkedNode<T>* LinkedNode<T>::getNext(){
 }
 
 template <class T>
-T LinkedNode<T>::getItem() {
-    return *item;
+T* LinkedNode<T>::getItem() {
+    return item;
 }
 
 
@@ -37,6 +37,6 @@ void LinkedNode<T>::setNext(LinkedNode* newNext){
 
 
 template <class T>
-void LinkedNode<T>::setItem(T newItem){
-    this->item=new T(newItem);
+void LinkedNode<T>::setItem(T* newItem){
+    this->item=newItem;
 }

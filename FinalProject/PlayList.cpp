@@ -20,7 +20,7 @@ Playlist::~Playlist() {
 
 void Playlist::addSongToEnd(Song songToAdd){
     LinkedNode<Song>* newNode=new LinkedNode<Song>();
-    newNode->setItem(songToAdd);
+    newNode->setItem(&songToAdd);
     if(head== nullptr){
         head = newNode;
         end = newNode;
@@ -40,7 +40,7 @@ void Playlist::remove(Song songToRemove){
     LinkedNode<Song>* temp=head;
     int count=0;
     while(temp!= nullptr){
-        if(temp->getItem().getTitle()==songToRemove.getTitle()){
+        if(temp->getItem()->getTitle()==songToRemove.getTitle()){
             temp= nullptr;
         }
         else {
@@ -68,14 +68,51 @@ std::string Playlist::getName() {
 }
 
 
+
+
 Song Playlist::getSong(std::string title) {
-    LinkedNode<Song>* temp=head;
-    for(int i=0; i<size; i++){
-        if(temp->getItem().getTitle()==title){
-            return temp->getItem();
+    LinkedNode<Song> *temp = head;
+    for (int i = 0; i < size; i++) {
+        if (temp->getItem()->getTitle() == title) {
+            return *temp->getItem();
         }
-        temp=temp->getNext();
+        temp = temp->getNext();
     }
 
-
+    throw std::invalid_argument("Song is not present");
 }
+
+    //Committed out for testing purposes
+    std::string Playlist::display(){
+
+    }
+
+    /**
+    *calculate the duration of the playlist
+    */
+    void Playlist::calcDuration(){
+
+    }
+
+    /**
+   *play next song, returning song info and removing it from playlist (playnext)
+     * Through exception if no more songs
+    **/
+    Song Playlist::playNextSong(){
+
+    }
+
+    /**
+     * •	check if empty
+     */
+    bool Playlist::isEmpty(){
+
+    }
+
+    /**
+     *
+     */
+
+
+
+

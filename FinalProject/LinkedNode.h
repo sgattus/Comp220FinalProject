@@ -19,9 +19,9 @@ private:
 public:
     LinkedNode();
     LinkedNode(const LinkedNode& nodeToCopy); //only copies item, next is set to nullptr
-    T getItem();
+    T* getItem();
     LinkedNode* getNext();
-    void setItem(T newItem);
+    void setItem(T* newItem);
     void setNext(LinkedNode* newNext);
 };
 

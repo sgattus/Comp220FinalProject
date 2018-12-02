@@ -20,7 +20,7 @@ RandomPlaylist::RandomPlaylist(std::string name, int duration){
 
 void RandomPlaylist::addSongToEnd(Song songToAdd){
     LinkedNode<Song>* newNode=new LinkedNode<Song>();
-    newNode->setItem(songToAdd);
+    newNode->setItem(&songToAdd);
     if(head== nullptr){
         head = newNode;
         end = newNode;
@@ -40,7 +40,7 @@ void RandomPlaylist::remove(Song songToRemove){
     LinkedNode<Song>* temp=head;
     int count=0;
     while(temp!= nullptr){
-        if(temp->getItem().getTitle()==songToRemove.getTitle()){
+        if(temp->getItem()->getTitle()==songToRemove.getTitle()){
             temp= nullptr;
         }
         else {
@@ -71,8 +71,8 @@ std::string RandomPlaylist::getName() {
 Song RandomPlaylist::getSong(std::string title) {
     LinkedNode<Song>* temp=head;
     for(int i=0; i<size; i++){
-        if(temp->getItem().getTitle()==title){
-            return temp->getItem();
+        if(temp->getItem()->getTitle()==title){
+            return *temp->getItem();
         }
         temp=temp->getNext();
     }

@@ -11,8 +11,8 @@
 template <class T>
 class PlayListMap: public Map<T>{
 private:
-    LinkedNode<Playlist> *head;
-    LinkedNode<Playlist>  *end;
+    LinkedNode<List> *head;
+    LinkedNode<List>  *end;
     //acess to the library
     LibraryMap<Song> *libray;
 
@@ -46,33 +46,16 @@ public:
    */
 
     void setLibrary(LibraryMap<Song> lib);
-    void put(Playlist& value);
-
-    //Might Not Need this
-//    /**
-//     * •	add a new random playlist (newrandom)
-//     */
-//
-//    void putRand(int duration);
+    void put(List& value);
 
 
-    void add(std::string name, std::string artist, std::string title);
-
-
-    /**
-      *remove the given song from given playlist
-     * Use this.get to find playlist
-     *
-     *Use playlist remove song from given playlist
-     */
-    void remove(std::string name, std::string artist, std::string title);
 
 
     /**
     * @return the value associated with the given name
     * @throws std::invalid_argument if the name is not present
     */
-    Playlist get(std::string name);
+    List* get(std::string name);
 
     /**
      * @return true if the given name is associated with a value in the map, false otherwise
