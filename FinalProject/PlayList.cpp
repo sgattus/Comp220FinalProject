@@ -36,30 +36,40 @@ void Playlist::addSongToEnd(Song songToAdd){
 }
 
 
-void Playlist::remove(Song songToRemove){
-    LinkedNode<Song>* temp=head;
-    int count=0;
-    while(temp!= nullptr){
-        if(temp->getItem()->getTitle()==songToRemove.getTitle()){
-            temp= nullptr;
-        }
-        else {
+void Playlist::remove(Song songToRemove) {
+    if(songToRemove.getTitle()==head->getItem()->getTitle()){
+        LinkedNode<Song> *temp = head;
+        head=head->getNext();
+        delete temp;
+        size -=1;
+    }
+    else {
+        LinkedNode<Song> *temp = head;
+        int count = 0;
+        while (temp != nullptr) {
             count += 1;
-            temp = temp->getNext();
-        }
-    }
-    int i = 0;
-    temp=head;
-    while (temp != nullptr && i + 1 < count) {
-        temp = temp->getNext();
-        i += 1;
-    }
-    LinkedNode<Song>* tempNode=temp->getNext();
-    temp->setNext(temp->getNext()->getNext());
-    size -= 1;
-    delete tempNode;
-    tempNode= nullptr;
+            if (temp->getItem()->getTitle() == songToRemove.getTitle()) {
 
+                temp = nullptr;
+            } else {
+
+                temp = temp->getNext();
+            }
+        }
+        int i = 0;
+        temp = head;
+        while (temp != nullptr && i + 2 < count) {
+            temp = temp->getNext();
+            i += 1;
+        }
+
+
+        LinkedNode<Song> *tempNode = temp->getNext();
+        temp->setNext(temp->getNext()->getNext());
+        size -= 1;
+        delete tempNode;
+        tempNode = nullptr;
+    }
 }
 
 

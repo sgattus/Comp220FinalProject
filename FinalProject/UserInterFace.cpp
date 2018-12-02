@@ -45,6 +45,6 @@ void UserInterFace::playNext(std::string name) {
     Song song=listOfPlaylist->get(name)->playNextSong();
     listOfPlaylist->getLibrary()->get(song.getTitle())->playSong();
     //figure out play count
-    cout<<song.getTitle() + " " + song.getArtist()+ " " + to_string(song.getDuration() + )<<endl;
+    cout<<song.getTitle() + " " + song.getArtist()+ " " + to_string(song.getDuration() )<<endl;
 
 }
