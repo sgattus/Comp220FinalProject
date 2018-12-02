@@ -52,7 +52,10 @@ void PlayListMap<T>::setLibrary(LibraryMap<Song> lib){
 }
 
 
-
+template <class T>
+LibraryMap<Song>* PlayListMap<T>::getLibrary(){
+    return libray;
+}
 
 
 template <class T>

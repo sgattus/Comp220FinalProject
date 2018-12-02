@@ -7,13 +7,16 @@
 #include "LibraryMap.h"
 #include "PlayList.h"
 #include "Song.h"
+#include "List.h"
 
-template <class T>
+
 class UserInterFace{
     private:
-    PlayListMap<T> listOfPlaylist;
+    PlayListMap<List>* listOfPlaylist;
+
 
     public:
+    UserInterFace(PlayListMap<List>* listOfPlaylistIn);
 
     /**
      * Provide a summary of all available commands.
@@ -51,6 +54,7 @@ class UserInterFace{
          * fileName parameter ?
          */
          void import(std::string fileName);
+
 
          /**
           * Remove all songs from the given file from the library. Also remove these songs from any playlist in which they occur.
@@ -91,6 +95,8 @@ class UserInterFace{
 
 
 };
+
+
 
 
 

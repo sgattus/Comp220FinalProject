@@ -78,6 +78,8 @@ public:
       */
       void removePlayList(std::string name);
 
+      LibraryMap<Song>* getLibrary();
+
 
 
 };

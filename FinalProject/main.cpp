@@ -6,7 +6,7 @@
 #include "PlayListMap.h"
 #include "UserInterFace.h"
 #include "TestLib.h"
-    using namespace std;
+using namespace std;
 
 void LibraryMapTest()
 {
@@ -155,11 +155,19 @@ void PlayListMapTest()
         printAssertEquals("Song is not present", e.what());
     }
 
+    UserInterFace UI=UserInterFace(p);
+    cout<<UI.displayLibrary()<<endl;
+    UI.neW("pump up jams");
+    UI.add("pump up jams","Genesis", "That's All");
+
 
 
 
     std::cout << "--done--" << std::endl;
 }
+
+
+
 int main()
     {
 
@@ -168,6 +176,7 @@ int main()
     testLibraryAssignmentOperator();
     PlayListMapTest();
     cout<<"--testDone--"<<endl;
+
 
 
 

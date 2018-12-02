@@ -99,6 +99,11 @@ Song Playlist::getSong(std::string title) {
      * Through exception if no more songs
     **/
     Song Playlist::playNextSong(){
+        LinkedNode<Song>* temp= head;
+        head=head->getNext();
+        Song* song=temp->getItem();
+        delete temp;
+        return *song;
 
     }
 
