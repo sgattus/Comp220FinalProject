@@ -79,6 +79,30 @@ List* PlayListMap<T>::get(std::string name){
 }
 
 template <class T>
+Song PlayListMap<T>::playNext(std::string name){
+    LinkedNode<List> *temp = head;
+    for (int i = 0; i < size; i++) {
+        if (temp->getItem()->getName()==name) {
+            return temp->getItem()->playNextSong();
+        } else {
+            temp = temp->getNext();
+        }
+    }
+    temp = nullptr;
+    //} else {
+    if(this->containsKey(name)==false){
+
+        throw std::invalid_argument("PlayList is not present");
+
+
+    }
+
+
+}
+
+
+
+template <class T>
 bool PlayListMap<T>::containsKey(std::string name){
 
     LinkedNode<List>* temp=head;

@@ -80,6 +80,8 @@ public:
 
       LibraryMap<Song>* getLibrary();
 
+    Song playNext(std::string name);
+
 
 
 };

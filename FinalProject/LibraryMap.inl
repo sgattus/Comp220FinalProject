@@ -162,6 +162,11 @@ bool LibraryMap<T>::containsKey(std::string songName){
 }
 
 template <class T>
+Song LibraryMap<T>::playNext(std::string name){
+
+}
+
+template <class T>
 std::string LibraryMap<T>::display() {
     //iterate through Linked Library Map
     LinkedNode<T>* temp=head;

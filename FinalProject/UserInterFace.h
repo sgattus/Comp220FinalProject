@@ -78,7 +78,7 @@ class UserInterFace{
              * Add to the playcount for that song in the library.
              * If the playlist is now empty, it should be removed.
              */
-             void playNext(std::string name);
+             void playNext(std::string name,PlayListMap<List> map);
 
              /**
               * Make a new playlist with the given name, and populate it with a random group of songs that do not repeat
@@ -92,6 +92,8 @@ class UserInterFace{
                */
 
                 void quit();
+
+                PlayListMap<List>* getPlayList();
 
 
 };

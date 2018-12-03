@@ -110,8 +110,8 @@ Song Playlist::getSong(std::string title) {
     **/
     Song Playlist::playNextSong(){
         LinkedNode<Song>* temp= head;
-        head=head->getNext();
         Song* song=temp->getItem();
+        head=head->getNext();
         size -=1;
         delete temp;
         return *song;

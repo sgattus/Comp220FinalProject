@@ -35,6 +35,8 @@ private:
     */
     void discountinue();
 
+    Song playNext(std::string name);
+
 //
 public:
     /**

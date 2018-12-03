@@ -32,6 +32,8 @@ public:
      */
     virtual bool containsKey(std::string name) =0;
 
+    virtual Song playNext(std::string name)=0;
+
 };
 
 #endif //MAP_H

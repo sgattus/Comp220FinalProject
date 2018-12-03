@@ -32,7 +32,9 @@ void UserInterFace::neW(std::string name){
 
 void  UserInterFace::add(std::string name, std::string artist, std::string title) {
     if(listOfPlaylist->getLibrary()->containsKey(title)==true){
-        listOfPlaylist->get(name)->addSongToEnd(*listOfPlaylist->getLibrary()->get(title));
+        List* p1=listOfPlaylist->get(name);
+        p1->addSongToEnd(*listOfPlaylist->getLibrary()->get(title));
+        listOfPlaylist->put(*p1);
         cout<<"Added " + title + "to " + name+ " playlist"<<endl;
         cout<<"check " + listOfPlaylist->get(name)->getSong(title).getTitle()<<endl;
     }
@@ -41,10 +43,13 @@ void  UserInterFace::add(std::string name, std::string artist, std::string title
     }
 }
 
-void UserInterFace::playNext(std::string name) {
-    Song song=listOfPlaylist->get(name)->playNextSong();
-    listOfPlaylist->getLibrary()->get(song.getTitle())->playSong();
-    //figure out play count
-    cout<<song.getTitle() + " " + song.getArtist()+ " " + to_string(song.getDuration() )<<endl;
+PlayListMap<List>* UserInterFace::getPlayList(){
+    return listOfPlaylist;
+}
+
+void UserInterFace::playNext(std::string name, PlayListMap<List> map) {
+ Song song= listOfPlaylist->playNext(name);
+ cout<<song.getTitle()<<endl;
+ //
 
 }

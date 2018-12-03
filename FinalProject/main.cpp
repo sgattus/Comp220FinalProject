@@ -157,8 +157,14 @@ void PlayListMapTest()
 
     UserInterFace UI=UserInterFace(p);
     cout<<UI.displayLibrary()<<endl;
-    UI.neW("pump up jams");
-    UI.add("pump up jams","Genesis", "That's All");
+    UI.neW("red");
+    UI.add("red","Genesis", "That's All");
+    PlayListMap<List>* map=UI.getPlayList();
+    UI.playNext("red",*map);
+
+
+ std::cout<<"help"<<endl;
+
 
 
 
@@ -171,9 +177,9 @@ void PlayListMapTest()
 int main()
     {
 
-    LibraryMapTest();
-    testLibraryCopyConstructor();
-    testLibraryAssignmentOperator();
+//    LibraryMapTest();
+//    testLibraryCopyConstructor();
+//    testLibraryAssignmentOperator();
     PlayListMapTest();
     cout<<"--testDone--"<<endl;
 
