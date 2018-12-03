@@ -54,6 +54,7 @@ class Playlist: public List {
 
          /**
           * •	check if empty
+          * return true if empty
           */
           bool isEmpty();
 
@@ -61,6 +62,10 @@ class Playlist: public List {
            *
            */
            std::string getName();
+
+           void clearList();
+
+           int getDuration();
 
 
 
