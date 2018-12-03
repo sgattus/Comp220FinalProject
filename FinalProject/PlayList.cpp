@@ -113,6 +113,7 @@ Song Playlist::getSong(std::string title) {
         Song* song=temp->getItem();
         head=head->getNext();
         size -=1;
+
         delete temp;
         return *song;
 
@@ -122,6 +123,12 @@ Song Playlist::getSong(std::string title) {
      * •	check if empty
      */
     bool Playlist::isEmpty(){
+        if(size==0){
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 

@@ -160,7 +160,8 @@ void PlayListMapTest()
     UI.neW("red");
     UI.add("red","Genesis", "That's All");
     PlayListMap<List>* map=UI.getPlayList();
-    UI.playNext("red",*map);
+    UI.playNext("red");
+    UI.playNext("sonya");
 
 
  std::cout<<"help"<<endl;

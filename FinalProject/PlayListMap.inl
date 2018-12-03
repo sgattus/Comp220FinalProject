@@ -123,23 +123,60 @@ bool PlayListMap<T>::containsKey(std::string name){
 
 template <class T>
 void PlayListMap<T>::removePlayList(std::string name) {
-    LinkedNode<T>* temp=head;
-    int count=0;
-    while(temp!= nullptr){
-        if(temp->getItem().getName()==name){
-            temp= nullptr;
+    if(name==head->getItem()->getName()){
+        LinkedNode<List> *temp = head;
+        head=head->getNext();
+        delete temp;
+        size -=1;
+    }
+    else {
+        LinkedNode<List> *temp = head;
+        int count = 0;
+        while (temp != nullptr) {
+            count += 1;
+            if (temp->getItem()->getName() == name) {
+
+                temp = nullptr;
+            } else {
+
+                temp = temp->getNext();
+            }
         }
-        count +=1;
+        int i = 0;
+        temp = head;
+        while (temp != nullptr && i + 2 < count) {
+            temp = temp->getNext();
+            i += 1;
+        }
+
+
+        LinkedNode<List> *tempNode = temp->getNext();
+        temp->setNext(temp->getNext()->getNext());
+        size -= 1;
+        delete tempNode;
+        tempNode = nullptr;
     }
-    int i = 0;
-    temp=head;
-    while (temp != nullptr && i + 1 < count) {
-        temp = temp->getNext();
-        i += 1;
-    }
-    LinkedNode<T> tempNode=temp->getNext();
-    temp->setNext(temp->getNext()->getNext());
-    size -= 1;
-    delete tempNode;
-    tempNode= nullptr;
 }
+
+//template <class T>
+//void PlayListMap<T>::removePlayList(std::string name) {
+//    LinkedNode<List>* temp=head;
+//    int count=0;
+//    while(temp!= nullptr){
+//        if(temp->getItem()->getName()==name){
+//            temp= nullptr;
+//        }
+//        count +=1;
+//    }
+//    int i = 0;
+//    temp=head;
+//    while (temp != nullptr && i + 1 < count) {
+//        temp = temp->getNext();
+//        i += 1;
+//    }
+//    LinkedNode<List>* tempNode=temp->getNext();
+//    temp->setNext(temp->getNext()->getNext());
+//    size -= 1;
+//    delete tempNode;
+//    tempNode= nullptr;
+//}

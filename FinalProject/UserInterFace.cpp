@@ -47,9 +47,11 @@ PlayListMap<List>* UserInterFace::getPlayList(){
     return listOfPlaylist;
 }
 
-void UserInterFace::playNext(std::string name, PlayListMap<List> map) {
+void UserInterFace::playNext(std::string name) {
  Song song= listOfPlaylist->playNext(name);
  cout<<song.getTitle()<<endl;
- //
+// if(listOfPlaylist->get(name)->isEmpty()==true){
+//     listOfPlaylist->removePlayList(name);
+// }//
 
 }
