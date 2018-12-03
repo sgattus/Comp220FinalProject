@@ -129,6 +129,10 @@ Song Playlist::getSong(std::string title) {
      *
      */
 
+    int Playlist::getDuration() {
+
+    }
+
 
 
 

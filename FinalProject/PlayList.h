@@ -62,6 +62,8 @@ class Playlist: public List {
            */
            std::string getName();
 
+           int getDuration();
+
 
 
 };

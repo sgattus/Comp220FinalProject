@@ -166,6 +166,48 @@ void PlayListMapTest()
     std::cout << "--done--" << std::endl;
 }
 
+void randomPlaylistTest(){
+    List* p1= new RandomPlaylist("My Faves", 100000);
+    Song s1 = Song("Lady Gaga", "Poker Face", 200);
+    p1->addSongToEnd(s1);
+
+    Song s2 = Song("Sia", "Chandelier", 200);
+    p1->addSongToEnd(s2);
+
+
+    Song s3 = Song("Kelsey-Ryan Elizabeth-Lily Grant", "i was born in a tree", 500);
+    p1->addSongToEnd(s3);
+
+    Song s4 = Song("Sonart Robitussin Guhtaytus", "it's been a coon's age", 50);
+    p1->addSongToEnd(s4);
+
+    Song s5 = Song("Katherine Louise Polley", "EP: drownin in pussy", 1000);
+    p1->addSongToEnd(s5);
+
+    Song s6 = Song("Kerry Anne Buckman", "Lullaby #5", 5);
+    p1->addSongToEnd(s6);
+
+
+    p1->calcDuration();
+    printAssertEquals(1955, p1->getDuration());
+
+
+
+    Song s7=Song("Artist", "Song Name", 200);
+    p1->addSongToEnd(s7);
+    p1->calcDuration();
+    printAssertEquals(2155, p1->getDuration());
+
+    p1->remove(s7);
+    p1->calcDuration();
+    printAssertEquals(1955, p1->getDuration());
+
+    printAssertEquals(s1.getTitle(),p1->getSong(s1.getTitle()).getTitle());
+    printAssertEquals(s2.getTitle(),p1->getSong(s2.getTitle()).getTitle());
+
+    printAssertEquals("My Faves", p1->getName());
+}
+
 
 
 int main()
@@ -175,6 +217,7 @@ int main()
     testLibraryCopyConstructor();
     testLibraryAssignmentOperator();
     PlayListMapTest();
+    randomPlaylistTest();
     cout<<"--testDone--"<<endl;
 
 

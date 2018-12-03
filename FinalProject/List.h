@@ -55,7 +55,7 @@ public:
      */
     virtual std::string getName()=0;
 
-
+    virtual int getDuration()=0;
 
 
 
