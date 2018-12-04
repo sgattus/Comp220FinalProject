@@ -324,8 +324,9 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
                 addSongToEnd(songToAdd);
             }
             temp = nullptr;
-            return tries;
+
         }
+        return tries;
     }
 
     newNode= nullptr;

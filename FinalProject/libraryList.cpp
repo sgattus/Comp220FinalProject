@@ -264,5 +264,9 @@ Song libraryList::randomSong(){
     return *temp->getItem();
 }
 
+int libraryList::fillRP(List* p, int maxDuration, Song& songToAdd, int tries){
+
+}
+
 
 

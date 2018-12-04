@@ -22,6 +22,8 @@ public:
 
     std::string displayLibrary();
 
+    //void help();
+
 
 
 };

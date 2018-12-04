@@ -72,6 +72,13 @@ void UserInterFace::neWRandomPlayList(){
         p1->calcDuration();
     }
 
+    std::cout<<"out of loop"<<std::endl;
+
+    listOfPlaylist->put(*p1);
+
+    std::string dispStr= p1->display();
+    std::cout<<dispStr<<std::endl;
+
 
 }
 
@@ -81,7 +88,7 @@ void UserInterFace::neWRandomPlayList(){
 
 int main()
 {
-
+    srand(time(NULL));
     UserInterFace ui= UserInterFace();
     ui.neW("p1");
     ui.neW("p2");
@@ -91,6 +98,10 @@ int main()
     ui.add("p1","Men At Work","Land Down Under");
     ui.add("p1","KerryAnne Buckman","Lullaby #5");
     ui.playNext("p1");
+    ui.neWRandomPlayList();
+    ui.playNext("My Faves");
+
+
 
 
     std::cout<<"--testDone--"<<std::endl;
