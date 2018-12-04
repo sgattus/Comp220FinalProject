@@ -211,6 +211,39 @@ void PlayListTest(){
         printAssertEquals("Song is not present", e.what());
     }
 //test 2
+    cout<<"display() Test:"<<endl;
+
+    //cout<< playList->display() <<endl;
+
+    printAssertEquals("Mr. Brightside by The Killers(duration of 227 seconds),"
+                      " Heart It Races by Dr.Dog(duration of 233 seconds),"
+                      " Black Ballerina by Ariel Pink(duration of 350 seconds), "
+                      "Men's Needs by The Cribs(duration of 195 seconds)", playList->display());
+
+    playList->playNextSong();
+
+    printAssertEquals("Heart It Races by Dr.Dog(duration of 233 seconds), "
+                      "Black Ballerina by Ariel Pink(duration of 350 seconds),"
+                      " Men's Needs by The Cribs(duration of 195 seconds)", playList->display());
+
+    playList->playNextSong();
+
+    printAssertEquals( "Black Ballerina by Ariel Pink(duration of 350 seconds),"
+                       " Men's Needs by The Cribs(duration of 195 seconds)", playList->display());
+
+    //remove rest of songs
+
+    playList->remove(song3);
+    playList->remove(song4);
+
+    //add them again so that they're in order for the rest of the tests
+
+    playList->addSongToEnd(song1);
+    playList->addSongToEnd(song2);
+    playList->addSongToEnd(song3);
+    playList->addSongToEnd(song4);
+
+//test 3
     cout<<"calcDuration() Test:"<<endl;
 
     playList->calcDuration();
@@ -260,9 +293,6 @@ void PlayListTest(){
     printAssertEquals(true, playList->isEmpty());
 
     cout<<"--done--"<<endl;
-
-
-
 }
 
 int main()
