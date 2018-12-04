@@ -3,13 +3,14 @@
 
 #include "Map.h"
 #include "PlayListMap.h"
-
+#include "List.h"
+#include "libraryList.h"
 
 
 class UserInterFace{
 private:
-    PlayListMap<List> listOfPlaylist;
-    LibraryMap<Song>* libraryMap;
+    PlayListMap* listOfPlaylist;
+    List* lib;
 
 
 public:
@@ -17,7 +18,7 @@ public:
     void neW(std::string name);
     void add(std::string name, std::string artist, std::string title);
     void playNext(std::string name);
-    PlayListMap<List> getPlayListMap();
+
     std::string displayLibrary();
 
 

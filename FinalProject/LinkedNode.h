@@ -6,6 +6,8 @@
 #define LINKEDNODE_H
 
 #include <string>
+#include "Song.h"
+#include "List.h"
 
 
 
@@ -21,8 +23,9 @@ public:
     LinkedNode(const LinkedNode& nodeToCopy); //only copies item, next is set to nullptr
     T* getItem();
     LinkedNode* getNext();
-    void setItem(T* newItem);
+    void setItem(Song newItem);
     void setNext(LinkedNode* newNext);
+    void setList(List* newItem);
 };
 
 #include "LinkedNode.inl"

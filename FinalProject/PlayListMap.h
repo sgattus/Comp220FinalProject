@@ -45,7 +45,7 @@ public:
    *Add Play List to map of playlists
    */
 
-    void setLibrary(LibraryMap<Song> lib);
+
     void put(List& value);
 
 
@@ -78,7 +78,7 @@ public:
       */
       void removePlayList(std::string name);
 
-      LibraryMap<Song>* getLibrary();
+
 
     Song playNext(std::string name);
 

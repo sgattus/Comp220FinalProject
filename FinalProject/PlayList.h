@@ -22,7 +22,7 @@ public:
 //        Playlist(const Playlist& playlistToCopy);
 //        Playlist<T>& operator=(const Playlist<T>& playlistToCopy);
     ~Playlist();
-    void addSongToEnd(Song songToAdd);
+    void addSongToEnd(Song& songToAdd);
     void remove(Song songToRemove);
     Song getSong(std::string title);
 

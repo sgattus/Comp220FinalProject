@@ -20,7 +20,7 @@ RandomPlaylist::RandomPlaylist(std::string name, int duration){
 
 void RandomPlaylist::addSongToEnd(Song songToAdd){
     LinkedNode<Song>* newNode=new LinkedNode<Song>();
-    newNode->setItem(&songToAdd);
+    newNode->setItem(songToAdd);
     if(head== nullptr){
         head = newNode;
         end = newNode;

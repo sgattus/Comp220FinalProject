@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "PlayList.h"
-using namespace std;
+
 
 
 Playlist::Playlist(std::string name){
@@ -20,9 +20,9 @@ Playlist::~Playlist() {
 }
 
 
-void Playlist::addSongToEnd(Song songToAdd){
+void Playlist::addSongToEnd(Song& songToAdd){
     LinkedNode<Song>* newNode=new LinkedNode<Song>();
-    newNode->setItem(&songToAdd);
+    newNode->setItem(songToAdd);
     if(head== nullptr){
         head = newNode;
         end = newNode;

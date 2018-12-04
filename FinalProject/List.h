@@ -15,13 +15,13 @@ public:
     //constructor
     List() {}
 
-//    List(const List& listToCopy);
+    List(const List& listToCopy);
 //    virtual List& operator=(const List& listToCopy)=0;
 
     //Destructor
     virtual ~List() {}
 
-     virtual void addSongToEnd(Song songToAdd)=0;
+     virtual void addSongToEnd(Song& songToAdd)=0;
      virtual void remove(Song songToRemove)=0;
     /**
     * Display all the names of the playlist and their durations

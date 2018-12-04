@@ -16,7 +16,7 @@ PlayListMap::PlayListMap() {
 
 void PlayListMap::put(List& value){
     LinkedNode<List>* newNode=new LinkedNode<List>();
-    newNode->setItem(&value);
+    newNode->setList(&value);
     if(head== nullptr){
         head = newNode;
         end = newNode;
@@ -26,7 +26,7 @@ void PlayListMap::put(List& value){
         LinkedNode<List>* temp=head;
         for(int i=0; i<size; i++){
             if(temp->getItem()->getName()==value.getName()) {
-                temp->setItem(&value);
+                temp->setList(&value);
             }
             else{
                 temp=temp->getNext();
@@ -46,15 +46,11 @@ void PlayListMap::put(List& value){
 }
 
 
-void PlayListMap::setLibrary(LibraryMap<Song> lib){
-
-}
 
 
 
-LibraryMap<Song>* PlayListMap::getLibrary(){
 
-}
+
 
 
 
@@ -124,7 +120,7 @@ void PlayListMap::removePlayList(std::string name) {
     LinkedNode<List>* temp=head;
     int count=0;
     while(temp!= nullptr){
-        if(temp->getItem().getName()==name){
+        if(temp->getItem()->getName()==name){
             temp= nullptr;
         }
         count +=1;
