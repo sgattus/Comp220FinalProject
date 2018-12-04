@@ -47,8 +47,8 @@ void UserInterFace::add(std::string name, std::string artist, std::string title)
 }
 
 void UserInterFace::playNext(std::string name){
-    Song song= listOfPlaylist->playNext(name);
-    std::cout<<song.getTitle()<<std::endl;
+    Song song= listOfPlaylist->get(name)->playNextSong();
+    std::cout<<song.getTitle() + " " + song.getArtist() + " " + std::to_string(song.getDuration())<<std::endl;
 
 
 
@@ -56,7 +56,7 @@ void UserInterFace::playNext(std::string name){
 }
 
 std::string UserInterFace::displayLibrary(){
-    return "";
+    return "working";
 
 }
 
@@ -71,7 +71,7 @@ int main()
     ui.neW("p1");
     ui.neW("p2");
     ui.add("p1","Genesis","That's All");
-    //ui.playNext("p1");
+    ui.playNext("p1");
     std::cout<<ui.displayLibrary();
 
     std::cout<<"--testDone--"<<std::endl;
