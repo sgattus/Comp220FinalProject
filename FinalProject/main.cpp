@@ -161,6 +161,13 @@ void PlayListMapTest()
     UI.add("red","Genesis", "That's All");
     PlayListMap<List>* map=UI.getPlayList();
     UI.playNext("red",*map);
+    map->get("red")->addSongToEnd(song1);
+    Song song = map->playNext("red");
+    std::cout<<song.getTitle()<<song.getArtist();
+
+
+
+
 
 
  std::cout<<"help"<<endl;
