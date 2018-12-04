@@ -4,6 +4,7 @@
 
 
 
+
 Playlist::Playlist(std::string name){
     head= nullptr;
     end= nullptr;
@@ -123,6 +124,9 @@ Song Playlist::playNextSong(){
     Song* song=temp->getItem();
     head=head->getNext();
     size -=1;
+    if(head== nullptr){
+        end= nullptr;
+    }
     delete temp;
     return *song;
 

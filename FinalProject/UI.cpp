@@ -13,11 +13,13 @@ UserInterFace::UserInterFace(){
     Song song2 = Song("Genesis", "That's All", 2);
     Song song3 = Song("Men At Work", "Land Down Under", 2);
     Song song4 = Song("Grateful Dead", "Brown Eyed Women", 4);
+    Song song5 = Song("KerryAnne Buckman","Lullaby #5", 5);
 
     lib->addSongToEnd(song1);
     lib->addSongToEnd(song2);
     lib->addSongToEnd(song3);
     lib->addSongToEnd(song4);
+    lib->addSongToEnd(song5);
 
     listOfPlaylist->put(*lib);
 
@@ -48,7 +50,7 @@ void UserInterFace::add(std::string name, std::string artist, std::string title)
 
 void UserInterFace::playNext(std::string name){
     Song song= listOfPlaylist->get(name)->playNextSong();
-    std::cout<<song.getTitle() + " " + song.getArtist() + " " + std::to_string(song.getDuration())<<std::endl;
+    std::cout<<"Song Removed: " + song.getTitle() + " " + song.getArtist() + " " + std::to_string(song.getDuration())<<std::endl;
 
 
 
@@ -73,6 +75,10 @@ int main()
     ui.add("p1","Genesis","That's All");
     ui.playNext("p1");
     std::cout<<ui.displayLibrary();
+    ui.add("p1","Men At Work","Land Down Under");
+    ui.add("p1","KerryAnne Buckman","Lullaby #5");
+    ui.playNext("p1");
+
 
     std::cout<<"--testDone--"<<std::endl;
 
