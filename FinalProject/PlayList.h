@@ -67,6 +67,10 @@ public:
 
     int getDuration();
 
+    int fillRP(List* p, int maxDuration, Song& songToAdd, int tries);
+
+    Song randomSong();
+
 
 
 

@@ -8,12 +8,13 @@
 #include "List.h"
 
 
-class RandomPlaylist: public List {
+class RandomPlaylist:public List {
 private:
     LinkedNode<Song> *head;
     LinkedNode<Song>  *end;
     std::string name;
     int duration;
+
 
     int size;
 
@@ -26,42 +27,49 @@ public:
     RandomPlaylist(std::string name, int duration);
     RandomPlaylist(const RandomPlaylist& playlistToCopy);
     RandomPlaylist& operator=(const RandomPlaylist& playlistToCopy);
-    void addSongToEnd(Song songToAdd);
+    void addSongToEnd(Song& songToAdd);
     void remove(Song songToRemove);
+    ~RandomPlaylist();
 //    /**
 //    * Display all the names of the playlist and their durations
-//    * •	return a string representing all songs in the playlist
+//    * •  return a string representing all songs in the playlist
 //    */
-//    std::string display();
-//
-//    /**
-//    *calculate the duration of the playlist
-//    */
-//    void calcDuration();
-//
-//    /**
-//   *play next song, returning song info and removing it from playlist (playnext)
-//     * Through exception if no more songs
-//    **/
-//    Song playNextSong();
-//
-//    /**
-//     * •	check if empty
-//     */
-//    bool isEmpty();
+
+    std::string display();
+
+    /**
+    *calculate the duration of the playlist
+    */
+    void calcDuration();
+
+    /**
+   *play next song, returning song info and removing it from playlist (playnext)
+     * Through exception if no more songs
+    **/
+    Song playNextSong();
+
+    /**
+     * •   check if empty
+     */
+    bool isEmpty();
 
     /**
      *
      */
-     std::string getName();
+    std::string getName();
 
-     Song getSong(std::string song);
+    Song randomSong();
 
+    Song getSong(std::string song);
+    /**
+    *
+    */
+    int getDuration();
 
+    int fillRP(List* p, int maxDuration, Song& songToAdd, int tries);
 
+    void clearList();
 };
-
-
 
 
 #endif //PLAYLIST_H

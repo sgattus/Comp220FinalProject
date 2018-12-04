@@ -158,5 +158,9 @@ int Playlist::getDuration() {
     return duration;
 }
 
+int Playlist::fillRP(List* p, int maxDuration, Song songToAdd, int tries){
+
+}
+
 
 

@@ -25,6 +25,7 @@ public:
     void addSongToEnd(Song& songToAdd);
     void remove(Song songToRemove);
     Song getSong(std::string title);
+    Song randomSong();
 
     /**
      * These are commited out for my test to run since they do not have definitions yet

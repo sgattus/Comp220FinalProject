@@ -243,4 +243,26 @@ int libraryList::getDuration() {
 }
 
 
+int genRandInt(int min, int max){
+    if (min>max) {
+        int newMin = max;
+        int newMax = min;
+        min = newMin;
+        max = newMax;
+    }
+    int randInt= rand()%(max-min+1)+min;
+    return randInt;
+}
+
+Song libraryList::randomSong(){
+    int nodeNum= genRandInt(1, size);
+    LinkedNode<Song>* temp= head;
+    for (int i=1; i<nodeNum; i++){
+        temp=temp->getNext();
+    }
+
+    return *temp->getItem();
+}
+
+
 

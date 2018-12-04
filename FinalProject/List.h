@@ -55,6 +55,12 @@ public:
      */
     virtual std::string getName()=0;
 
+    virtual  int fillRP(List* p, int maxDuration, Song& songToAdd, int tries)=0;
+
+    virtual Song randomSong()=0;
+
+    virtual int getDuration()=0;
+
 
 
 

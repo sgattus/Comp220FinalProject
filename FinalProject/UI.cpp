@@ -62,6 +62,19 @@ std::string UserInterFace::displayLibrary(){
 
 }
 
+void UserInterFace::neWRandomPlayList(){
+    int tries=0;
+    List* p1= new RandomPlaylist("My Faves", 100000);
+    while(p1->getDuration()<700 && tries<3){
+        Song songToAdd= lib->randomSong();
+        std::cout<<"in loop"<<std::endl;
+        tries=p1->fillRP(p1, 700, songToAdd, tries);
+        p1->calcDuration();
+    }
+
+
+}
+
 
 
 
