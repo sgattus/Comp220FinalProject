@@ -1,7 +1,14 @@
 
-
+#include<iostream>
+#include<string.h>
+#include<stdio.h>
+#include "LibraryMap.h"
+#include "Song.h"
+#include "PlayListMap.h"
 #include "UI.h"
-#include <iostream>
+#include "TestLib.h"
+using namespace std;
+
 
 UserInterFace::UserInterFace(){
     listOfPlaylist= PlayListMap<List>();
@@ -33,6 +40,7 @@ void UserInterFace::add(std::string name, std::string artist, std::string title)
         listOfPlaylist.put(*p1);
         cout<<"Added " + title + "to " + name+ " playlist"<<endl;
         cout<<"check " + listOfPlaylist.get(name)->getSong(title).getTitle()<<endl;
+
     }
     else{
         cout<<"Song is not in Library"<<endl;
@@ -40,11 +48,20 @@ void UserInterFace::add(std::string name, std::string artist, std::string title)
 }
 
 void UserInterFace::playNext(std::string name){
-    std::cout<<"hey"<<std::endl;
-    List* p1=listOfPlaylist.get(name);
-    listOfPlaylist.put(*p1);
+    Song song= listOfPlaylist.playNext(name);
+    cout<<song.getTitle()<<endl;
 
 
+
+
+}
+
+std::string UserInterFace::displayLibrary(){
+    return listOfPlaylist.getLibrary()->display();
+}
+
+PlayListMap<List> UserInterFace::getPlayListMap(){
+    return listOfPlaylist;
 }
 
 
@@ -56,7 +73,9 @@ int main()
     ui.neW("p1");
     ui.neW("p2");
     ui.add("p1","Genesis","That's All");
-    ui.playNext("p1");
+    //ui.playNext("p1");
+    std::cout<<ui.displayLibrary();
+
     cout<<"--testDone--"<<endl;
 
 

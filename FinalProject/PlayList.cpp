@@ -13,8 +13,10 @@ Playlist::Playlist(std::string name){
 
 }
 
-
 Playlist::~Playlist() {
+    if (this->head != nullptr){
+        this->clearList();
+    }
 }
 
 
@@ -73,6 +75,7 @@ void Playlist::remove(Song songToRemove) {
 }
 
 
+
 std::string Playlist::getName() {
     return name;
 }
@@ -92,43 +95,64 @@ Song Playlist::getSong(std::string title) {
     throw std::invalid_argument("Song is not present");
 }
 
-    //Committed out for testing purposes
-    std::string Playlist::display(){
+//Committed out for testing purposes
+std::string Playlist::display(){
 
+}
+
+/**
+*calculate the duration of the playlist
+*/
+void Playlist::calcDuration(){
+    int totalDuration=0;
+    LinkedNode<Song>* temp=head;
+    for (int i = 0; i < size; i++) {
+        totalDuration = totalDuration + temp->getItem()->getDuration();
+        temp = temp->getNext();
     }
+    duration = totalDuration;
+    temp = nullptr;
+}
 
-    /**
-    *calculate the duration of the playlist
-    */
-    void Playlist::calcDuration(){
+/**
+*play next song, returning song info and removing it from playlist (playnext)
+* Through exception if no more songs
+**/
+Song Playlist::playNextSong(){
+    LinkedNode<Song>* temp= head;
+    Song* song=temp->getItem();
+    head=head->getNext();
+    size -=1;
+    delete temp;
+    return *song;
 
+}
+
+
+
+/**
+* •	check if empty
+* return true if empty
+*/
+bool Playlist::isEmpty(){
+    if (size == 0){
+        return true;
     }
-
-    /**
-   *play next song, returning song info and removing it from playlist (playnext)
-     * Through exception if no more songs
-    **/
-    Song Playlist::playNextSong(){
-        LinkedNode<Song>* temp= head;
-        Song* song=temp->getItem();
-        head=head->getNext();
-        size -=1;
-        delete temp;
-        return *song;
-
+    else{
+        return false;
     }
-
-    /**
-     * •	check if empty
-     */
-    bool Playlist::isEmpty(){
-
+}
+void Playlist::clearList(){
+    while (isEmpty() == false){
+        this->remove(*head->getItem());
     }
+    head = nullptr;
+    end = nullptr;
+}
 
-    /**
-     *
-     */
-
+int Playlist::getDuration() {
+    return duration;
+}
 
 
 
