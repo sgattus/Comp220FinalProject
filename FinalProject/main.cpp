@@ -156,14 +156,14 @@ void PlayListMapTest()
     }
 
     UserInterFace UI=UserInterFace(p);
-    cout<<UI.displayLibrary()<<endl;
+    //cout<<UI.displayLibrary()<<endl;
     UI.neW("red");
     UI.add("red","Genesis", "That's All");
     PlayListMap<List>* map=UI.getPlayList();
     UI.playNext("red",*map);
-    map->get("red")->addSongToEnd(song1);
-    Song song = map->playNext("red");
-    std::cout<<song.getTitle()<<song.getArtist();
+    //map->get("red")->addSongToEnd(song1);
+    //Song song = map->playNext("red");
+    //std::cout<<song.getTitle()<<song.getArtist();
 
 
 
@@ -177,6 +177,13 @@ void PlayListMapTest()
 
 
     std::cout << "--done--" << std::endl;
+}
+
+void UITest(){
+
+    PlayListMap<List> playListMap= PlayListMap<List>();
+
+
 }
 
 
