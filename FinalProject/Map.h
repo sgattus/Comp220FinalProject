@@ -7,8 +7,9 @@
 
 #include <string>
 #include "Song.h"
+#include "List.h"
 
-template <class T>
+
 class Map {
 public:
     //virtual destructor to allow child destructor to be called
@@ -19,13 +20,13 @@ public:
      *       if the key was already present, the new value overwrites the old value
      *       (i.e., the new value will be returned by get instead of the old value)
      */
-    virtual void put(T& value) =0;
+    virtual void put(List& value) =0;
 
     /*
      * @return the value associated with the given key
      * @throws std::invalid_argument if the key is not present
      */
-    virtual T* get(std::string name) =0;
+    virtual List* get(std::string name) =0;
 
     /*
      * @return true if the given key is associated with a value in the map, false otherwise
