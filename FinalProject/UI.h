@@ -19,6 +19,8 @@ public:
     void add(std::string name, std::string artist, std::string title);
     void playNext(std::string name);
     void neWRandomPlayList();
+    void testPlayListCopyConstructor();
+    void testPlayListAssignmentOperator();
 
     std::string displayLibrary();
 
