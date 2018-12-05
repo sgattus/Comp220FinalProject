@@ -58,7 +58,7 @@ void UserInterFace::playNext(std::string name){
 }
 
 std::string UserInterFace::displayLibrary(){
-    return "working";
+    return lib->display();
 
 }
 
@@ -82,6 +82,10 @@ void UserInterFace::neWRandomPlayList(){
 
 }
 
+std::string UserInterFace::diplayPlaylist(std::string name){
+    return listOfPlaylist->get(name)->display();
+}
+
 
 
 
@@ -100,6 +104,9 @@ int main()
     ui.playNext("p1");
     ui.neWRandomPlayList();
     ui.playNext("My Faves");
+    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+    std::cout<<ui.displayLibrary()<<std::endl;
 
 
 

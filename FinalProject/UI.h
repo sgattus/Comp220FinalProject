@@ -23,6 +23,7 @@ public:
     std::string displayLibrary();
 
     //void help();
+    std::string diplayPlaylist(std::string name);
 
 
 

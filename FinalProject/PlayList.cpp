@@ -98,6 +98,24 @@ Song Playlist::getSong(std::string title) {
 
 //Committed out for testing purposes
 std::string Playlist::display(){
+    LinkedNode<Song>* temp=head;
+    std::string playlistString="";
+    while (temp->getNext()!= nullptr){
+        std::string artist= temp->getItem()->getArtist();
+        std::string title= temp->getItem()->getTitle();
+        std::string duration= std::to_string(temp->getItem()->getDuration());
+        playlistString+=title+" by "+artist+"(duration of "+duration+" seconds), ";
+        temp=temp->getNext();
+    }
+    //last node in the list(it will have a next of nullptr so the while loop won't cover it
+    std::string artist= temp->getItem()->getArtist();
+    std::string title= temp->getItem()->getTitle();
+    std::string duration= std::to_string(temp->getItem()->getDuration());
+    playlistString+=title+" by "+artist+"(duration of "+duration+" seconds)";
+
+    temp=nullptr;
+
+    return playlistString;
 
 }
 
