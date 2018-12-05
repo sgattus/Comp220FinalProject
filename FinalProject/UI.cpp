@@ -3,6 +3,8 @@
 #include<string>
 #include "UI.h"
 #include "TestLib.h"
+#include <sstream>
+using namespace std;
 
 
 
@@ -43,17 +45,34 @@ void UserInterFace::neW(std::string name){
 
 void UserInterFace::add(std::string name, std::string artist, std::string title){
     std::cout<<"Add Song To Playlist\n";
-    if(lib->getSong(title).getTitle()==title){
+//    if(lib->getSong(title).getTitle()==title){
+//        List* p1=listOfPlaylist->get(name);
+//        Song song=lib->getSong(title);
+//        p1->addSongToEnd(song);
+//        listOfPlaylist->put(*p1);
+//        std::cout<<"Added " + title + "to " + name+ " playlist"<<std::endl;
+//        //std::cout<<"check " + listOfPlaylist->get(name)->getSong(title).getTitle()<<std::endl;
+//
+//    }
+//    else{
+//        std::cout<<"Song is not in Library"<<std::endl;
+//    }
+
+
+    try {
+        listOfPlaylist->get(name);
         List* p1=listOfPlaylist->get(name);
         Song song=lib->getSong(title);
         p1->addSongToEnd(song);
         listOfPlaylist->put(*p1);
         std::cout<<"Added " + title + "to " + name+ " playlist"<<std::endl;
-        //std::cout<<"check " + listOfPlaylist->get(name)->getSong(title).getTitle()<<std::endl;
 
     }
-    else{
-        std::cout<<"Song is not in Library"<<std::endl;
+    catch (std::invalid_argument &e) {
+        //printAssertEquals("PlayList is not present", e.what());
+        ("Song is not in Library");
+        std::cout<<"Song is not in Library, can't add :( \n";
+
     }
 }
 
@@ -122,6 +141,15 @@ std::string UserInterFace::displayAllPlaylist(){
     return listOfPlaylist->display();
 }
 
+void UserInterFace::addSongToLibrary(std::string artist, std::string song, int duration){
+    std::cout<<"Add Song to Library\n";
+    Song newSong = Song(artist, song,duration);
+
+    lib->addSongToEnd(newSong);
+    Song testSong=lib->getSong(song);
+    std::cout<<"Added " + testSong.getTitle() + " by "+ testSong.getArtist() + " with a duration of "+ std::to_string(testSong.getDuration()) + " to library\n";
+}
+
 std::string UserInterFace::removeSong(std::string name){
     std::cout<<"Remove Song\n";
 
@@ -188,7 +216,7 @@ int main()
     std::string choice;
     while(choice!="12"){
         std::cout<<"Welcome, Please press corresponding number with choice listed"<<std::endl;
-        std::cout<<"1) HELP\n 2)Display Library\n 3)Display Playlist\n 12)QUIT\n";
+        std::cout<<"1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 12)QUIT\n";
         std::cout<<"Please Enter Choice: ";
         std::getline(std::cin,choice);
         if(choice=="1"){
@@ -206,11 +234,55 @@ int main()
 
         }
         else if(choice=="4"){
-            std::cout<<"Please enter song to remove from Playlist(s) and library\n";
+            std::cout<<"Please enter song to remove from Playlist(s) and library: \n";
             std::string song;
             std::getline(std::cin,song);
             std::cout<<ui.removeSong(song) + "\n";
         }
+
+        else if(choice=="5"){
+            std::cout<<"Please enter Playlist, Song to add, and Artitst \n";
+            std::string song;
+            std::string playlist;
+            std::string artist;
+            std::cout<<"Please Enter Song: \n";
+            std::getline(std::cin,song);
+            std::cout<<"Please Enter Artitst: \n";
+            std::getline(std::cin,artist);
+            std::cout<<"Please Enter Playlist: \n";
+            std::getline(std::cin,playlist);
+            ui.add(playlist,artist,song);
+        }
+
+        else if(choice=="6"){
+            std::cout<<"Please enter Song to add, Artitst, and Duration \n";
+            std::string song;
+            std::string duration;
+            std::string artist;
+            std::cout<<"Please Enter Song: \n";
+            std::getline(std::cin,song);
+            std::cout<<"Please Enter Artitst: \n";
+            std::getline(std::cin,artist);
+            std::cout<<"Please Enter Playlist: \n";
+            std::getline(std::cin,duration);
+            std::stringstream geek(duration);
+            int x=0;
+            geek>>x;
+            ui.addSongToLibrary(artist,song,x);
+
+        }
+
+        else if(choice=="7") {
+            std::cout << "Please enter Playlist name: ";
+            std::string playlist;
+            std::getline(std::cin, playlist);
+            ui.playNext(playlist);
+        }
+
+        else if(choice=="8"){
+            std::cout<<ui.displayAllPlaylist() + "\n";
+        }
+
     }
 
 

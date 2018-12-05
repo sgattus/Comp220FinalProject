@@ -28,6 +28,8 @@ public:
 
     std::string removeSong(std::string name);
 
+    void addSongToLibrary(std::string artist, std::string song, int duration);
+
 
 
 };
