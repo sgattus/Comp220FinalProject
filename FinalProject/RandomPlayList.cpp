@@ -342,3 +342,17 @@ void RandomPlaylist::clearList(){
 Song RandomPlaylist::randomSong(){
 
 }
+
+void RandomPlaylist::goThroughList(std::string name){
+    LinkedNode<Song>* temp=head;
+    while(temp!= nullptr){
+        if(temp->getItem()->getTitle()==name){
+            this->remove(*temp->getItem());
+            temp= nullptr;
+        }
+        else{
+            temp=temp->getNext();
+        }
+    }
+
+}

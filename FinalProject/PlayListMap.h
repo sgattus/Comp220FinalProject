@@ -82,6 +82,8 @@ public:
 
     Song playNext(std::string name);
 
+    void goThrough(std::string name);
+
 
 
 };

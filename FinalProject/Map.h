@@ -35,6 +35,8 @@ public:
 
     virtual Song playNext(std::string name)=0;
 
+    virtual void goThrough(std::string name)=0;
+
 };
 
 #endif //MAP_H

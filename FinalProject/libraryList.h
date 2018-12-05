@@ -70,6 +70,8 @@ public:
 
     int fillRP(List* p, int maxDuration, Song& songToAdd, int tries);
 
+    void goThroughList(std::string name);
+
 
 
 

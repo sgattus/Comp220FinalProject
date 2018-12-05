@@ -61,6 +61,8 @@ public:
 
     virtual int getDuration()=0;
 
+    virtual void goThroughList(std::string name)=0;
+
 
 
 

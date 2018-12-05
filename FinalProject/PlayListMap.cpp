@@ -172,3 +172,12 @@ std::string PlayListMap::display(){
     return playLists;
 
 }
+
+void PlayListMap::goThrough(std::string name) {
+    LinkedNode<List>* tempList=head;
+    while(tempList!= nullptr){
+        tempList->getItem()->goThroughList(name);
+        tempList=tempList->getNext();
+
+    }
+}

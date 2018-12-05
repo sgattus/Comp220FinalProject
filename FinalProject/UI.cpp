@@ -14,14 +14,18 @@ UserInterFace::UserInterFace(){
     Song song3 = Song("Men At Work", "Land Down Under", 2);
     Song song4 = Song("Grateful Dead", "Brown Eyed Women", 4);
     Song song5 = Song("KerryAnne Buckman","Lullaby #5", 5);
+    Song song6 = Song("Kelsey Grant","I Was Born In A Tree",7);
+    Song song7 = Song("Ween", "It's Gonna Be Alright Baby",9);
 
     lib->addSongToEnd(song1);
     lib->addSongToEnd(song2);
     lib->addSongToEnd(song3);
     lib->addSongToEnd(song4);
     lib->addSongToEnd(song5);
+    lib->addSongToEnd(song6);
+    lib->addSongToEnd(song7);
 
-    listOfPlaylist->put(*lib);
+
 
 
 
@@ -87,11 +91,20 @@ void UserInterFace::neWRandomPlayList(std::string name){
 }
 
 std::string UserInterFace::diplayPlaylist(std::string name){
-    return listOfPlaylist->get(name)->display();
+    return name + ": "+ listOfPlaylist->get(name)->display();
 }
 
 std::string UserInterFace::displayAllPlaylist(){
     return listOfPlaylist->display();
+}
+
+std::string UserInterFace::removeSong(std::string name){
+    Song song=lib->getSong(name);
+    lib->goThroughList(name);
+
+    listOfPlaylist->goThrough(name);
+    return"Song Removed: " + song.getTitle()+ ", " + song.getArtist()+ ", " + std::to_string(song.getDuration());
+
 }
 
 
@@ -113,7 +126,9 @@ int main()
     ui.playNext("p2");
     std::cout<<ui.displayLibrary();
     ui.add("p1","Men At Work","Land Down Under");
+    ui.add("p1","Ween", "It's Gonna Be Alright Baby");
     ui.add("p1","KerryAnne Buckman","Lullaby #5");
+    ui.add("p1","Kelsey Grant","I Was Born In A Tree");
     ui.playNext("p1");
     ui.neWRandomPlayList("My Faves");
     ui.playNext("My Faves");
@@ -122,6 +137,13 @@ int main()
     std::cout<<ui.displayLibrary()<<std::endl;
     std::cout<<ui.displayAllPlaylist()<<std::endl;
     ui.playNext("p1");
+    std::cout<<ui.displayLibrary()<<std::endl;
+    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+    std::cout<<ui.removeSong("Lullaby #5")<<std::endl;
+    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+    std::cout<<ui.displayLibrary()<<std::endl;
 
 
 

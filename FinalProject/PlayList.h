@@ -71,6 +71,8 @@ public:
 
     Song randomSong();
 
+    void goThroughList(std::string name);
+
 
 
 

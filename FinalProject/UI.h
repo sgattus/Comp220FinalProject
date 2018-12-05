@@ -26,6 +26,8 @@ public:
     std::string diplayPlaylist(std::string name);
     std::string displayAllPlaylist();
 
+    std::string removeSong(std::string name);
+
 
 
 };

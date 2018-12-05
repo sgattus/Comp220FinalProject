@@ -69,6 +69,8 @@ public:
     int fillRP(List* p, int maxDuration, Song& songToAdd, int tries);
 
     void clearList();
+
+    void goThroughList(std::string name);
 };
 
 
