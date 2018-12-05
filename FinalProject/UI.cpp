@@ -6,6 +6,7 @@
 
 
 
+
 UserInterFace::UserInterFace(){
     listOfPlaylist= new PlayListMap();
     lib= new libraryList("Library");
@@ -151,25 +152,29 @@ int main()
 
 
     std::cout<<"--testDone--"<<std::endl;
-    int choice=0;
-    while(choice!=12){
+    std::string choice;
+    while(choice!="12"){
         std::cout<<"Welcome, Please press corresponding number with choice listed"<<std::endl;
         std::cout<<"1) HELP\n 2)Display Library\n 3)Display Playlist\n 12)QUIT\n";
         std::cout<<"Please Enter Choice: ";
-        std::cin>>choice;
-        if(choice==1){
+        std::getline(std::cin,choice);
+        if(choice=="1"){
             std::cout<<"Not implemented yet, sorry :(\n";
 
         }
-        else if(choice==2){
+        else if(choice=="2"){
             std::cout<<ui.displayLibrary() + "\n";
         }
-        else if(choice==3){
+        else if(choice=="3"){
             std::cout<<"Please enter Playlist name: ";
             std::string playlist;
-//            std::getline(std::cin,playlist);
-//            //std::cout<<ui.displayAllPlaylist();
-//            std::cout<<ui.diplayPlaylist(playlist) + "\n";
+            std::getline(std::cin,playlist);
+            std::cout<<playlist<<std::endl;
+            std::cout<<ui.displayAllPlaylist();
+            std::cout<<ui.diplayPlaylist(playlist) + "\n";
+
+
+
         }
     }
 
