@@ -12,7 +12,51 @@ Playlist::Playlist(std::string name){
     duration=0;
 
 }
+//copy constructor
 
+Playlist::Playlist(const Playlist& LinkedListMapToCopy){
+    LinkedNode<Song>* newNode = LinkedListMapToCopy.head;
+    size = 0;
+    head = nullptr;
+    end = nullptr;
+    while(newNode!= nullptr){
+        newSong = (newNode->getSong());
+        this->addSongToEnd(newNode->getItem(),newSong);
+        newNode = newNode->getNext();
+    }
+
+    delete newNode;
+    newNode= nullptr;
+}
+
+//assignment operator
+
+Playlist& Playlist::operator=(const Playlist & LinkedListMapToCopy) {
+    if(this!= &LinkedListMapToCopy){
+        while(head!= nullptr){
+            LinkedNode<Song>* tempNode= head;
+            head = head->getNext();
+            size--;
+            delete tempNode;
+        }
+        size = 0;
+        head= nullptr;
+        end= nullptr;
+
+        LinkedNode<Song>* tempNode=LinkedListMapToCopy.head;
+        while(tempNode!= nullptr){
+            Song* newSong = (tempNode->getItem());
+            this->insertAtEnd(tempNode->getItem(),newSong);
+            tempNode = tempNode->getNext();
+        }
+
+        delete tempNode;
+        tempNode= nullptr;
+    }
+    return* this;
+}
+
+//destructor
 Playlist::~Playlist() {
     if (this->head != nullptr){
         this->clearList();

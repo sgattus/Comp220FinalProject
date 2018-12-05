@@ -38,8 +38,8 @@ public:
 
 
 
-    //Destructor
-   // ~PlayListMap();
+    Destructor
+    ~PlayListMap();
 
     /**
    *Add Play List to map of playlists

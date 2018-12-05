@@ -15,6 +15,12 @@ PlayListMap<T>::PlayListMap() {
 }
 
 template <class T>
+//destructor
+PlayListMap<T>::~PlayListMap(){
+
+}
+
+template <class T>
 void PlayListMap<T>::put(List& value){
     LinkedNode<List>* newNode=new LinkedNode<List>();
     newNode->setItem(&value);
@@ -95,6 +101,28 @@ bool PlayListMap<T>::containsKey(std::string name){
     }
     temp= nullptr;
     return isKeyed;
+}
+
+template <class T>
+std::string PlayListMap<T>::display(){
+    LinkedNode<Song>* temp=head;
+    std::string playlistString="";
+    while (temp->getNext()!= nullptr){
+        std::string artist= temp->getItem()->getArtist();
+        std::string title= temp->getItem()->getTitle();
+        std::string duration= std::to_string(temp->getItem()->getDuration());
+        playlistString+=title+" by "+artist+"(duration of "+duration+" seconds), ";
+        temp=temp->getNext();
+    }
+    //last node in the list(it will have a next of nullptr so the while loop won't cover it
+    std::string artist= temp->getItem()->getArtist();
+    std::string title= temp->getItem()->getTitle();
+    std::string duration= std::to_string(temp->getItem()->getDuration());
+    playlistString+=title+" by "+artist+"(duration of "+duration+" seconds)";
+
+    temp=nullptr;
+
+    return playlistString;
 }
 
 template <class T>
