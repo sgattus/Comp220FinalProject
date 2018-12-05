@@ -260,12 +260,15 @@ bool RandomPlaylist::isEmpty(){
 
 Song RandomPlaylist::playNextSong(){
     LinkedNode<Song>* temp= head;
-    Song* ret= temp->getItem();
+    Song* song=temp->getItem();
     head=head->getNext();
+    size -=1;
+    if(head== nullptr){
+        end= nullptr;
+    }
     delete temp;
-    temp=nullptr;
-    size=size-1;
-    return *ret;
+    return *song;
+
 }
 
 
@@ -324,7 +327,7 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
                 addSongToEnd(songToAdd);
             }
             temp = nullptr;
-
+            return tries;
         }
         return tries;
     }

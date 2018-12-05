@@ -42,6 +42,7 @@ void PlayListMap::put(List& value){
         end=newNode;
         size +=1;
 
+
     }
 }
 
@@ -117,23 +118,57 @@ bool PlayListMap::containsKey(std::string name){
 
 
 void PlayListMap::removePlayList(std::string name) {
-    LinkedNode<List>* temp=head;
-    int count=0;
-    while(temp!= nullptr){
-        if(temp->getItem()->getName()==name){
-            temp= nullptr;
+    if(name==head->getItem()->getName()){
+        LinkedNode<List> *temp = head;
+        head=head->getNext();
+        delete temp;
+        size -=1;
+    }
+    else {
+        LinkedNode<List> *temp = head;
+        int count = 0;
+        while (temp != nullptr) {
+            count += 1;
+            if (temp->getItem()->getName() == name) {
+
+                temp = nullptr;
+            } else {
+
+                temp = temp->getNext();
+            }
         }
-        count +=1;
+        int i = 0;
+        temp = head;
+        while (temp != nullptr && i + 2 < count) {
+            temp = temp->getNext();
+            i += 1;
+        }
+
+
+        LinkedNode<List> *tempNode = temp->getNext();
+        if(end==tempNode){
+
+            end= temp;
+
+        }
+        temp->setNext(temp->getNext()->getNext());
+        size -= 1;
+
+        delete tempNode;
+        tempNode = nullptr;
     }
-    int i = 0;
-    temp=head;
-    while (temp != nullptr && i + 1 < count) {
-        temp = temp->getNext();
-        i += 1;
+}
+
+std::string PlayListMap::display(){
+    LinkedNode<List>* temp=head;
+    std::string playLists;
+    while(temp!= nullptr){
+        temp->getItem()->calcDuration();
+        playLists=playLists+temp->getItem()->getName() + ", " + std::to_string(temp->getItem()->getDuration())+ "; ";
+        temp=temp->getNext();
     }
-    LinkedNode<List>* tempNode=temp->getNext();
-    temp->setNext(temp->getNext()->getNext());
-    size -= 1;
-    delete tempNode;
-    tempNode= nullptr;
+    temp= nullptr;
+
+    return playLists;
+
 }

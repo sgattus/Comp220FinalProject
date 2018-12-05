@@ -51,7 +51,10 @@ void UserInterFace::add(std::string name, std::string artist, std::string title)
 void UserInterFace::playNext(std::string name){
     Song song= listOfPlaylist->get(name)->playNextSong();
     std::cout<<"Song Removed: " + song.getTitle() + " " + song.getArtist() + " " + std::to_string(song.getDuration())<<std::endl;
-
+    if(listOfPlaylist->get(name)->isEmpty()==true){
+        listOfPlaylist->removePlayList(name);
+        std::cout<<"Playlist " + name + " is removed!"<<std::endl;
+    }
 
 
 
@@ -62,12 +65,12 @@ std::string UserInterFace::displayLibrary(){
 
 }
 
-void UserInterFace::neWRandomPlayList(){
+void UserInterFace::neWRandomPlayList(std::string name){
     int tries=0;
-    List* p1= new RandomPlaylist("My Faves", 100000);
+    List* p1= new RandomPlaylist(name, 100000);
     while(p1->getDuration()<700 && tries<3){
         Song songToAdd= lib->randomSong();
-        std::cout<<"in loop"<<std::endl;
+        //std::cout<<"in loop"<<std::endl;
         tries=p1->fillRP(p1, 700, songToAdd, tries);
         p1->calcDuration();
     }
@@ -75,6 +78,7 @@ void UserInterFace::neWRandomPlayList(){
     std::cout<<"out of loop"<<std::endl;
 
     listOfPlaylist->put(*p1);
+
 
     std::string dispStr= p1->display();
     std::cout<<dispStr<<std::endl;
@@ -86,6 +90,10 @@ std::string UserInterFace::diplayPlaylist(std::string name){
     return listOfPlaylist->get(name)->display();
 }
 
+std::string UserInterFace::displayAllPlaylist(){
+    return listOfPlaylist->display();
+}
+
 
 
 
@@ -95,18 +103,25 @@ int main()
     srand(time(NULL));
     UserInterFace ui= UserInterFace();
     ui.neW("p1");
+    ui.neWRandomPlayList("Pump Up Jams");
+    ui.diplayPlaylist("Pump Up Jams");
+    ui.playNext("Pump Up Jams");
+    ui.playNext("Pump Up Jams");
     ui.neW("p2");
+    ui.add("p2","Genesis","That's All");
     ui.add("p1","Genesis","That's All");
-    ui.playNext("p1");
+    ui.playNext("p2");
     std::cout<<ui.displayLibrary();
     ui.add("p1","Men At Work","Land Down Under");
     ui.add("p1","KerryAnne Buckman","Lullaby #5");
     ui.playNext("p1");
-    ui.neWRandomPlayList();
+    ui.neWRandomPlayList("My Faves");
     ui.playNext("My Faves");
     std::cout<<ui.diplayPlaylist("p1")<<std::endl;
     std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
     std::cout<<ui.displayLibrary()<<std::endl;
+    std::cout<<ui.displayAllPlaylist()<<std::endl;
+    ui.playNext("p1");
 
 
 
