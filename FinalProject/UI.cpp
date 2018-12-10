@@ -37,6 +37,7 @@ UserInterFace::UserInterFace(){
 
 void UserInterFace::neW(std::string name){
     std::cout<<"Make New Playlist\n";
+
     List* playlist= new Playlist(name);
     listOfPlaylist->put(*playlist);
     std::cout<<"New Playlist made: " + name + "\n";
@@ -215,7 +216,7 @@ int main()
     std::string choice;
     while(choice!="12"){
         std::cout<<"Welcome, Please press corresponding number with choice listed"<<std::endl;
-        std::cout<<"1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 12)QUIT\n";
+        std::cout<<"1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist 12)QUIT\n";
         std::cout<<"Please Enter Choice: ";
         std::getline(std::cin,choice);
         if(choice=="1"){
@@ -300,6 +301,13 @@ int main()
 
         }
 
+        else if(choice=="11"){
+            std::cout<<"Please enter new Playlist name";
+            std::string playListName;
+            std::getline(std::cin, playListName);
+            ui.neW(playListName);
+            std::cout<<"Playlist " + playListName + " made";
+        }
     }
 
 
