@@ -10,7 +10,7 @@
 class UserInterFace{
 private:
     PlayListMap* listOfPlaylist;
-    List* lib;
+    libraryList* lib;
 
 
 public:
@@ -29,6 +29,7 @@ public:
     std::string removeSong(std::string name);
 
     void addSongToLibrary(std::string artist, std::string song, int duration);
+    std::string displayArtist(std::string artist);
 
 
 

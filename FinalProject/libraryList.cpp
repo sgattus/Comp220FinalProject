@@ -85,11 +85,11 @@ std::string libraryList::getName() {
 
 
 
-Song libraryList::getSong(std::string title) {
+Song* libraryList::getSong(std::string title) {
     LinkedNode<Song> *temp = head;
     for (int i = 0; i < size; i++) {
         if (temp->getItem()->getTitle() == title) {
-            return *temp->getItem();
+            return temp->getItem();
         }
         temp = temp->getNext();
     }
@@ -97,7 +97,7 @@ Song libraryList::getSong(std::string title) {
     throw std::invalid_argument("Song is not present");
 }
 
-//Committed out for testing purposes
+//I know it is not efficient but it works, would have gone back and fixed if I had more time
 std::string libraryList::display(){
 
         //iterate through Linked Library Map
@@ -266,10 +266,7 @@ Song libraryList::randomSong(){
     return *temp->getItem();
 }
 
-int libraryList::fillRP(List* p, int maxDuration, Song& songToAdd, int tries){
 
-
-}
 
 void libraryList::goThroughList(std::string name){
     LinkedNode<Song>* temp=head;
@@ -282,6 +279,22 @@ void libraryList::goThroughList(std::string name){
             temp=temp->getNext();
         }
     }
+
+}
+
+std::string libraryList::displayArtist(std::string artist) {
+    LinkedNode<Song>* temp=head;
+    std::string artistList=artist+ ": ";
+    while(temp!= nullptr){
+        if(temp!= nullptr){
+            if(temp->getItem()->getArtist()==artist){
+                artistList=artistList+temp->getItem()->getTitle()+", ";
+            }
+            temp=temp->getNext();
+        }
+    }
+
+    return artistList;
 
 }
 

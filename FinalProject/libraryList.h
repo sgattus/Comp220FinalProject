@@ -7,7 +7,7 @@
 #include "List.h"
 
 
-class libraryList: public List {
+class libraryList {
 private:
     LinkedNode<Song> *head;
     LinkedNode<Song>  *end;
@@ -24,7 +24,7 @@ public:
     ~libraryList();
     void addSongToEnd(Song& songToAdd);
     void remove(Song songToRemove);
-    Song getSong(std::string title);
+    Song* getSong(std::string title);
     Song randomSong();
 
     /**
@@ -39,7 +39,7 @@ public:
     * •	return a string representing all songs in the playlist
     */
 
-    //Committed out for testing purposes
+
     std::string display();
 
     /**
@@ -51,6 +51,7 @@ public:
    *play next song, returning song info and removing it from playlist (playnext)
      * Through exception if no more songs
     **/
+    //not sure yet what I want to do with this
     Song playNextSong();
 
     /**
@@ -68,9 +69,11 @@ public:
 
     int getDuration();
 
-    int fillRP(List* p, int maxDuration, Song& songToAdd, int tries);
+
 
     void goThroughList(std::string name);
+
+    std::string displayArtist(std::string artist);
 
 
 

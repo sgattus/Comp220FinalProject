@@ -55,8 +55,10 @@ public:
      */
     virtual std::string getName()=0;
 
+    //needs to be inherently called in rand play
     virtual  int fillRP(List* p, int maxDuration, Song& songToAdd, int tries)=0;
 
+    //needs to be inherently called in rand play
     virtual Song randomSong()=0;
 
     virtual int getDuration()=0;
