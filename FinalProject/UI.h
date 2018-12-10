@@ -30,6 +30,7 @@ public:
 
     void addSongToLibrary(std::string artist, std::string song, int duration);
     std::string displayArtist(std::string artist);
+    std::string displaySong(std::string title, std::string artist);
 
 
 
