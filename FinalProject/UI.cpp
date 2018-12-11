@@ -248,6 +248,7 @@ void writeFile(){
 
 void UserInterFace::saveFile() {
 listOfPlaylist->savePlaylist();
+lib->saveSongs();
 }
 
 
