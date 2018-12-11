@@ -18,7 +18,7 @@ public:
     void neW(std::string name);
     void add(std::string name, std::string artist, std::string title);
     void playNext(std::string name);
-    void neWRandomPlayList(std::string name);
+    void neWRandomPlayList(std::string name, int duration);
 
     std::string displayLibrary();
 
@@ -31,6 +31,7 @@ public:
     void addSongToLibrary(std::string artist, std::string song, int duration);
     std::string displayArtist(std::string artist);
     std::string displaySong(std::string title, std::string artist);
+
 
 
 
