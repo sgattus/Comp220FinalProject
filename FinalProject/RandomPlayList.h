@@ -71,6 +71,8 @@ public:
     void clearList();
 
     void goThroughList(std::string name);
+
+    void saveSongs(std::string fileName);
 };
 
 

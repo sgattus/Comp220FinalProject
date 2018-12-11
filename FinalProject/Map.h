@@ -8,6 +8,9 @@
 #include <string>
 #include "Song.h"
 #include "List.h"
+#include <fstream>
+#include <cstdlib> // for exit()
+using namespace std;
 
 
 class Map {
@@ -36,6 +39,8 @@ public:
     virtual Song playNext(std::string name)=0;
 
     virtual void goThrough(std::string name)=0;
+
+    virtual  void savePlaylist()=0;
 
 };
 

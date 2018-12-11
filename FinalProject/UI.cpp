@@ -4,6 +4,8 @@
 #include "UI.h"
 #include "TestLib.h"
 #include <sstream>
+#include <fstream>
+#include <cstdlib> // for exit()
 using namespace std;
 
 
@@ -220,6 +222,36 @@ std::string UserInterFace::displaySong(std::string title, std::string artist){
 
 }
 
+void writeFile(){
+
+    // ofstream is used for writing files
+    // We'll make a file called Sample.dat
+    ofstream outf("Sample.dat");
+
+    // If we couldn't open the output file stream for writing
+    if (!outf)
+    {
+        // Print an error and exit
+        cerr << "Uh oh, Sample.dat could not be opened for writing!" << endl;
+        exit(1);
+    }
+
+    // We'll write two lines into this file
+    outf << "This is line 1" << endl;
+    outf << "This is line 2" << endl;
+
+
+
+    // When outf goes out of scope, the ofstream
+    // destructor will close the file
+}
+
+void UserInterFace::saveFile() {
+listOfPlaylist->savePlaylist();
+}
+
+
+
 
 
 
@@ -227,6 +259,8 @@ std::string UserInterFace::displaySong(std::string title, std::string artist){
 int main()
 {
     srand(time(NULL));
+
+
     UserInterFace ui= UserInterFace();
     ui.neW("p1");
     ui.neWRandomPlayList("Pump Up Jams", 20);
@@ -257,6 +291,8 @@ int main()
     std::cout<<ui.diplayPlaylist("p1")<<std::endl;
     std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
     std::cout<<ui.displayLibrary()<<std::endl;
+
+    ui.saveFile();
 
 
 

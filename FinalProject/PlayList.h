@@ -73,6 +73,8 @@ public:
 
     void goThroughList(std::string name);
 
+    void saveSongs(std::string fileName);
+
 
 
 

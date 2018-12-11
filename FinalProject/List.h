@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include <string>
 #include "Song.h"
+#include <fstream>
+#include <cstdlib> // for exit()
+using namespace std;
 
 class List {
 private:
@@ -64,6 +67,8 @@ public:
     virtual int getDuration()=0;
 
     virtual void goThroughList(std::string name)=0;
+
+    virtual void saveSongs(std::string fileName)=0;
 
 
 

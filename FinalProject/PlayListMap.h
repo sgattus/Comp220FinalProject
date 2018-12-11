@@ -84,6 +84,8 @@ public:
 
     void goThrough(std::string name);
 
+    void savePlaylist();
+
 
 
 };

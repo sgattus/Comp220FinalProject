@@ -32,6 +32,7 @@ public:
     std::string displayArtist(std::string artist);
     std::string displaySong(std::string title, std::string artist);
     void removeSongFromPlaylist(std::string name, std::string artist, std::string title);
+    void saveFile();
 
 
 

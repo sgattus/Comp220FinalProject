@@ -1,7 +1,7 @@
 #include "PlayListMap.h"
 #include <iostream>
 #include <string>
-using namespace std;
+
 
 /**
  * Constructor
@@ -178,6 +178,32 @@ void PlayListMap::goThrough(std::string name) {
     while(tempList!= nullptr){
         tempList->getItem()->goThroughList(name);
         tempList=tempList->getNext();
+
+    }
+}
+
+void PlayListMap::savePlaylist() {
+    LinkedNode<List>* temp=head;
+
+    ofstream outf("Playlist.dat");
+
+    // If we couldn't open the output file stream for writing
+    if (!outf)
+    {
+        // Print an error and exit
+        cerr << "Uh oh, Music.dat could not be opened for writing!" << endl;
+        exit(1);
+    }
+    while(temp!= nullptr){
+
+
+
+        // We'll write two lines into this file
+        outf << temp->getItem()->getName() << endl;
+        temp->getItem()->saveSongs(temp->getItem()->getName());
+        temp=temp->getNext();
+
+
 
     }
 }
