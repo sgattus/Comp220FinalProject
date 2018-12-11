@@ -37,7 +37,6 @@ UserInterFace::UserInterFace(){
 
 void UserInterFace::neW(std::string name){
     std::cout<<"Make New Playlist\n";
-
     List* playlist= new Playlist(name);
     listOfPlaylist->put(*playlist);
     std::cout<<"New Playlist made: " + name + "\n";
