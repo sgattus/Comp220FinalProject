@@ -23,13 +23,13 @@ UserInterFace::UserInterFace(){
     Song song6 = Song("Kelsey Grant","I Was Born In A Tree",7);
     Song song7 = Song("Ween", "It's Gonna Be Alright Baby",9);
 
-    lib->addSongToEnd(song1);
-    lib->addSongToEnd(song2);
-    lib->addSongToEnd(song3);
-    lib->addSongToEnd(song4);
-    lib->addSongToEnd(song5);
-    lib->addSongToEnd(song6);
-    lib->addSongToEnd(song7);
+//    lib->addSongToEnd(song1);
+//    lib->addSongToEnd(song2);
+//    lib->addSongToEnd(song3);
+//    lib->addSongToEnd(song4);
+//    lib->addSongToEnd(song5);
+//    lib->addSongToEnd(song6);
+//    lib->addSongToEnd(song7);
 
 
 
@@ -294,6 +294,46 @@ void fileReading(){
     // destructor will close the file
 }
 
+void UserInterFace::import(std::string fileName) {
+    // ifstream is used for reading files
+    // We'll read from a file called Sample.dat
+    ifstream inf(fileName);
+
+    // If we couldn't open the output file stream for reading
+    if (!inf)
+    {
+        // Print an error and exit
+        cerr << "Uh oh, Sample.dat could not be opened for reading!" << endl;
+        exit(1);
+    }
+
+    // While there's still stuff left to read
+    while (inf)
+    {
+        // read stuff from the file into a string and print it
+        for(int i=0;i<3; i++) {
+            std::string artist;
+            getline(inf, artist);
+            std::string title;
+            getline(inf, title);
+            std::string duration;
+            getline(inf,duration);
+            std::stringstream geek(duration);
+            int x=0;
+            geek>>x;
+            if(artist != "") {
+                Song song(artist, title, x);
+                std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
+                lib->addSongToEnd(song);
+            }
+
+        }
+    }
+
+    std::cout<<"done"<<std::endl;
+
+}
+
 
 
 
@@ -304,9 +344,11 @@ int main()
 {
     srand(time(NULL));
 
-    fileReading();
+
 
     UserInterFace ui= UserInterFace();
+
+    ui.import("library.dat");
     ui.neW("p1");
     ui.neWRandomPlayList("Pump Up Jams", 20);
     std::cout<<ui.diplayPlaylist("Pump Up Jams") + "\n";
