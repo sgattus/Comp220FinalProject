@@ -75,6 +75,7 @@ public:
 
     std::string displayArtist(std::string artist);
 
+    void saveSongs();
 
 
 
