@@ -251,6 +251,49 @@ listOfPlaylist->savePlaylist();
 lib->saveSongs();
 }
 
+void fileReading(){
+    // ifstream is used for reading files
+    // We'll read from a file called Sample.dat
+    ifstream inf("library.dat");
+
+    // If we couldn't open the output file stream for reading
+    if (!inf)
+    {
+        // Print an error and exit
+        cerr << "Uh oh, Sample.dat could not be opened for reading!" << endl;
+        exit(1);
+    }
+
+    // While there's still stuff left to read
+    while (inf)
+    {
+        // read stuff from the file into a string and print it
+        for(int i=0;i<3; i++) {
+            std::string artist;
+            getline(inf, artist);
+            std::string title;
+            getline(inf, title);
+            std::string duration;
+            getline(inf,duration);
+            std::stringstream geek(duration);
+            int x=0;
+            geek>>x;
+            if(artist != "") {
+                Song song(artist, title, x);
+                std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
+            }
+
+        }
+    }
+
+    std::cout<<"done"<<std::endl;
+
+
+
+    // When inf goes out of scope, the ifstream
+    // destructor will close the file
+}
+
 
 
 
@@ -261,6 +304,7 @@ int main()
 {
     srand(time(NULL));
 
+    fileReading();
 
     UserInterFace ui= UserInterFace();
     ui.neW("p1");
