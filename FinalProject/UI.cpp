@@ -74,7 +74,6 @@ void UserInterFace::playNext(std::string name){
 
         Song song = listOfPlaylist->get(name)->playNextSong();
         lib->getSong(song.getTitle())->playSong();
-        std::cout << std::to_string(lib->getSong(song.getTitle())->getPlayCount()) + " \n";
         std::cout << "Song Removed: " + song.getTitle() + " " + song.getArtist() + " " +
                      std::to_string(song.getDuration()) << std::endl;
         if (listOfPlaylist->get(name)->isEmpty() == true) {
@@ -172,6 +171,41 @@ std::string UserInterFace::removeSong(std::string name){
 
 }
 
+void UserInterFace::removeSongFromPlaylist(std::string name, std::string artist, std::string title){
+    std::cout<<"Remove Song From Playlist \n";
+
+    bool isValid=true;
+    try {
+        listOfPlaylist->get(name);
+
+
+    }
+    catch (std::invalid_argument &e) {
+        //printAssertEquals("PlayList is not present", e.what());
+        ("PlayList is not present");
+        std::cout<<"Sorry Playlist does not exist \n";
+        isValid=false;
+
+    }
+
+    if(isValid==true){
+        try {
+            listOfPlaylist->get(name)->getSong(title).getTitle();
+            Song* song = lib->getSong(title);
+            listOfPlaylist->get(name)->goThroughList(title);
+            std::cout<< "Song Removed: " + song->getTitle() + ", " + song->getArtist() + ", " + std::to_string(song->getDuration()) + "\n";
+
+        }
+        catch (std::invalid_argument &e) {
+
+            ("Song is not in Library");
+            std::cout<<"Song is not in Playlist \n";
+        }
+
+    }
+
+}
+
 std::string UserInterFace::displayArtist(std::string artist) {
     std::cout<<"Display Artist \n";
     return lib->displayArtist(artist);
@@ -229,9 +263,9 @@ int main()
 
     std::cout<<"--testDone--"<<std::endl;
     std::string choice;
-    while(choice!="13"){
+    while(choice!="14"){
         std::cout<<"Welcome, Please press corresponding number with choice listed"<<std::endl;
-        std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)QUIT\n";
+        std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)Remove Song From Playlist\n 14)QUIT\n";
         std::cout<<"Please Enter Choice: ";
         std::getline(std::cin,choice);
         if(choice=="1"){
@@ -335,6 +369,21 @@ int main()
             int x=0;
             geek>>x;
             ui.neWRandomPlayList(randPlayListName,x);
+
+        }
+
+        else if(choice=="13"){
+            std::cout<<"Please enter Playlist/RandomPlaylist name: ";
+            std::string name;
+            std::getline(std::cin, name);
+            std::cout<<"Please enter Song title: ";
+            std::string title;
+            std::getline(std::cin, title);
+            std::cout<<"Please enter Song artist: ";
+            std::string artist;
+            std::getline(std::cin, artist);
+            ui.removeSongFromPlaylist(name,artist,title);
+
 
         }
     }
