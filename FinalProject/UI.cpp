@@ -332,15 +332,6 @@ void UserInterFace::import(std::string fileName) {
 
             }
 
-//            if(artist != "" ) {
-//                Song song(artist, title, x);
-//                std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
-//                lib->addSongToEnd(song);
-//
-//                lib->getSong(song.getTitle())->setPlaycount(y);
-//
-//            }
-
 
         }
     }
