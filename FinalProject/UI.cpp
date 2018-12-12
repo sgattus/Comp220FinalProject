@@ -318,14 +318,36 @@ void UserInterFace::import(std::string fileName) {
             std::stringstream love(playcount);
             int y=0;
             love>>y;
-            if(artist != "") {
-                Song song(artist, title, x);
-                std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
-                lib->addSongToEnd(song);
+            try {
+                lib->getSong(title)->getTitle();
+                std::cout<<"Song " + title + " already in library\n";
 
-                lib->getSong(song.getTitle())->setPlaycount(y);
 
             }
+            catch (std::invalid_argument &e) {
+
+                ("Song is not in Library");
+                if(artist != "" ) {
+                    Song song(artist, title, x);
+                    std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
+                    lib->addSongToEnd(song);
+
+                    lib->getSong(song.getTitle())->setPlaycount(y);
+
+                }
+
+
+            }
+
+//            if(artist != "" ) {
+//                Song song(artist, title, x);
+//                std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
+//                lib->addSongToEnd(song);
+//
+//                lib->getSong(song.getTitle())->setPlaycount(y);
+//
+//            }
+
 
         }
     }
