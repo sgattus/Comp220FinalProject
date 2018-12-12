@@ -327,6 +327,7 @@ void UserInterFace::import(std::string fileName) {
 
                     lib->getSong(song.getTitle())->setPlaycount(y);
 
+
                 }
 
 
@@ -436,6 +437,57 @@ void UserInterFace::removePlaylist(std::string name) {
 }
 
 
+void UserInterFace::discontinue(std::string fileName){
+    // ifstream is used for reading files
+    // We'll read from a file called Sample.dat
+    ifstream inf(fileName);
+
+    // If we couldn't open the output file stream for reading
+    if (!inf)
+    {
+        // Print an error and exit
+        cerr << "Uh oh, Sample.dat could not be opened for reading!" << endl;
+
+    }
+
+    // While there's still stuff left to read
+    while (inf)
+    {
+        // read stuff from the file into a string and print it
+        for(int i=0;i<4; i++) {
+            std::string artist;
+            getline(inf, artist);
+            std::string title;
+            getline(inf, title);
+            std::string duration;
+            getline(inf,duration);
+            std::stringstream geek(duration);
+            int x=0;
+            geek>>x;
+            std::string playcount;
+            getline(inf,playcount);
+            std::stringstream love(playcount);
+            int y=0;
+            love>>y;
+            if(artist != "") {
+                Song song(artist, title, x);
+                std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
+                this->removeSong(title);
+
+            }
+
+        }
+    }
+
+    std::cout<<"done"<<std::endl;
+
+
+
+    // When inf goes out of scope, the ifstream
+    // destructor will close the file
+}
+
+
 
 
 
@@ -454,10 +506,10 @@ int main()
 
     std::string choice;
     std::cout<<"Welcome, Please press corresponding number with choice listed"<<std::endl;
-    std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)Remove Song From Playlist\n 14)Import\n 15)QUIT\n";
+    std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)Remove Song From Playlist\n 14)Import\n 15)Remove PlayList\n 16)Discontinue\n 17)QUIT\n";
     std::cout<<"Please Enter Choice: ";
     std::getline(std::cin,choice);
-    while(choice!="16"){
+    while(choice!="17"){
         if(choice=="1"){
             std::cout<<"Not implemented yet, sorry :(\n";
 
@@ -592,13 +644,20 @@ int main()
 
         }
 
+        else if(choice=="16"){
+            std::string fileName;
+            std::cout<<"Please enter file name: ";
+            std::getline(std::cin,fileName);
+            ui.discontinue(fileName);
+        }
+
         std::cout<<"\n";
         std::cout<<"Welcome, Please press corresponding number with choice listed"<<std::endl;
-        std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)Remove Song From Playlist\n 14)Import\n 15)QUIT\n";
+        std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)Remove Song From Playlist\n 14)Import\n 15)Remove PlayList\n 16)Discontinue\n 17)QUIT\n";
         std::cout<<"Please Enter Choice: ";
         std::getline(std::cin,choice);
 
-        if(choice=="16"){
+        if(choice=="17"){
             ui.saveFile();
         }
     }

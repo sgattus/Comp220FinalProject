@@ -36,6 +36,8 @@ public:
     void import(std::string fileName);
     void startingImport();
     void removePlaylist(std::string name);
+    void discontinue(std::string fileName);
+
 
 
 
