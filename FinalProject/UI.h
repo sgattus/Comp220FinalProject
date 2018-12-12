@@ -34,6 +34,7 @@ public:
     void removeSongFromPlaylist(std::string name, std::string artist, std::string title);
     void saveFile();
     void import(std::string fileName);
+    void startingImport();
 
 
 

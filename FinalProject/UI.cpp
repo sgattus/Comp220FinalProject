@@ -6,6 +6,8 @@
 #include <sstream>
 #include <fstream>
 #include <cstdlib> // for exit()
+#include <stdio.h>
+#include<string.h>
 using namespace std;
 
 
@@ -15,13 +17,13 @@ UserInterFace::UserInterFace(){
     listOfPlaylist= new PlayListMap();
     lib= new libraryList("Library");
 
-    Song song1 = Song("Grateful Dead", "Box of Rain", 2);
-    Song song2 = Song("Genesis", "That's All", 2);
-    Song song3 = Song("Men At Work", "Land Down Under", 2);
-    Song song4 = Song("Grateful Dead", "Brown Eyed Women", 4);
-    Song song5 = Song("KerryAnne Buckman","Lullaby #5", 5);
-    Song song6 = Song("Kelsey Grant","I Was Born In A Tree",7);
-    Song song7 = Song("Ween", "It's Gonna Be Alright Baby",9);
+//    Song song1 = Song("Grateful Dead", "Box of Rain", 2);
+//    Song song2 = Song("Genesis", "That's All", 2);
+//    Song song3 = Song("Men At Work", "Land Down Under", 2);
+//    Song song4 = Song("Grateful Dead", "Brown Eyed Women", 4);
+//    Song song5 = Song("KerryAnne Buckman","Lullaby #5", 5);
+//    Song song6 = Song("Kelsey Grant","I Was Born In A Tree",7);
+//    Song song7 = Song("Ween", "It's Gonna Be Alright Baby",9);
 
 //    lib->addSongToEnd(song1);
 //    lib->addSongToEnd(song2);
@@ -80,6 +82,15 @@ void UserInterFace::playNext(std::string name){
                      std::to_string(song.getDuration()) << std::endl;
         if (listOfPlaylist->get(name)->isEmpty() == true) {
             listOfPlaylist->removePlayList(name);
+            std::string str= name+".dat";
+            char *cstr = new char[str.length() + 1];
+            strcpy(cstr, str.c_str());
+            if( remove( cstr ) != 0 ) {
+                perror("Error deleting file");
+            }
+            else {
+                puts("File successfully deleted");
+            }
             std::cout << "Playlist " + name + " is removed!" << std::endl;
         }
     }
@@ -104,14 +115,6 @@ void UserInterFace::neWRandomPlayList(std::string name, int duration){
         tries=p1->fillRP(p1, duration, songToAdd, tries);
         p1->calcDuration();
     }
-
-
-//    while(p1->getDuration()<700 && tries<3){
-//        Song songToAdd= lib->randomSong();
-//        tries=p1->fillRP(p1, 700, songToAdd, tries);
-//        p1->calcDuration();
-//    }
-
 
     listOfPlaylist->put(*p1);
     std::cout<<"New Random Playlist made: " + name + "\n";
@@ -334,6 +337,63 @@ void UserInterFace::import(std::string fileName) {
 
 }
 
+void UserInterFace::startingImport(){
+    // ifstream is used for reading files
+    // We'll read from a file called Sample.dat
+    ifstream inf("Playlist.dat");
+
+
+    // If we couldn't open the output file stream for reading
+    if (!inf)
+    {
+        // Print an error and exit
+        cerr << "Uh oh, Playlist.dat could not be opened for reading!" << endl;
+        exit(1);
+    }
+
+    // While there's still stuff left to read
+    while (inf)
+    {
+        std::string playlist;
+        getline(inf, playlist);
+        if (playlist != "") {
+            ifstream snf(playlist + ".dat");
+            this->neW(playlist);
+
+            if (!snf) {
+                // Print an error and exit
+                cerr << "Uh oh," + playlist + ".dat could not be opened for reading!" << endl;
+                exit(1);
+            }
+            while (snf) {
+                // read stuff from the file into a string and print it
+                for (int i = 0; i < 3; i++) {
+                    std::string artist;
+                    getline(snf, artist);
+                    std::string title;
+                    getline(snf, title);
+                    std::string duration;
+                    getline(snf, duration);
+                    std::stringstream geek(duration);
+                    int x = 0;
+                    geek >> x;
+                    if (artist != "") {
+                        Song song(artist, title, x);
+                        std::cout << song.getArtist() + ", " + song.getTitle() + ", " +
+                                     std::to_string(song.getDuration()) +
+                                     "\n";
+                        listOfPlaylist->get(playlist)->addSongToEnd(song);
+                    }
+
+
+                }
+            }
+        }
+    }
+
+    std::cout<<"done"<<std::endl;
+}
+
 
 
 
@@ -347,50 +407,52 @@ int main()
 
 
     UserInterFace ui= UserInterFace();
+    ui.startingImport();
 
     ui.import("library.dat");
-    ui.neW("p1");
-    ui.neWRandomPlayList("Pump Up Jams", 20);
-    std::cout<<ui.diplayPlaylist("Pump Up Jams") + "\n";
-    ui.playNext("Pump Up Jams");
-    ui.playNext("Pump Up Jams");
-    ui.neW("p2");
-    ui.add("p2","Genesis","That's All");
-    ui.add("p1","Genesis","That's All");
-    ui.playNext("p2");
-    std::cout<<ui.displayLibrary();
-    ui.add("p1","Men At Work","Land Down Under");
-    ui.add("p1","Ween", "It's Gonna Be Alright Baby");
-    ui.add("p1","KerryAnne Buckman","Lullaby #5");
-    ui.add("p1","Kelsey Grant","I Was Born In A Tree");
-    ui.playNext("p1");
-    ui.neWRandomPlayList("My Faves",20);
-    ui.playNext("My Faves");
-    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
-    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
-    std::cout<<ui.displayLibrary()<<std::endl;
-    std::cout<<ui.displayAllPlaylist()<<std::endl;
-    ui.playNext("p1");
-    std::cout<<ui.displayLibrary()<<std::endl;
-    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
-    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
-    std::cout<<ui.removeSong("Lullaby #5")<<std::endl;
-    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
-    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
-    std::cout<<ui.displayLibrary()<<std::endl;
+//    ui.neW("p1");
+//    ui.neWRandomPlayList("Pump Up Jams", 20);
+//    std::cout<<ui.diplayPlaylist("Pump Up Jams") + "\n";
+//    ui.playNext("Pump Up Jams");
+//    ui.playNext("Pump Up Jams");
+//    ui.neW("p2");
+//    ui.add("p2","Genesis","That's All");
+//    ui.add("p1","Genesis","That's All");
+//    ui.playNext("p2");
+//    std::cout<<ui.displayLibrary();
+//    ui.add("p1","Men At Work","Land Down Under");
+//    ui.add("p1","Ween", "It's Gonna Be Alright Baby");
+//    ui.add("p1","KerryAnne Buckman","Lullaby #5");
+//    ui.add("p1","Kelsey Grant","I Was Born In A Tree");
+//    ui.playNext("p1");
+//    ui.neWRandomPlayList("My Faves",20);
+//    ui.playNext("My Faves");
+//    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+//    std::cout<<ui.displayLibrary()<<std::endl;
+//    std::cout<<ui.displayAllPlaylist()<<std::endl;
+//    ui.playNext("p1");
+//    std::cout<<ui.displayLibrary()<<std::endl;
+//    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+//    std::cout<<ui.removeSong("Lullaby #5")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+//    std::cout<<ui.displayLibrary()<<std::endl;
 
-    ui.saveFile();
+
+
 
 
 
 
     std::cout<<"--testDone--"<<std::endl;
     std::string choice;
+    std::cout<<"Welcome, Please press corresponding number with choice listed"<<std::endl;
+    std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)Remove Song From Playlist\n 14)QUIT\n";
+    std::cout<<"Please Enter Choice: ";
+    std::getline(std::cin,choice);
     while(choice!="14"){
-        std::cout<<"Welcome, Please press corresponding number with choice listed"<<std::endl;
-        std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)Remove Song From Playlist\n 14)QUIT\n";
-        std::cout<<"Please Enter Choice: ";
-        std::getline(std::cin,choice);
         if(choice=="1"){
             std::cout<<"Not implemented yet, sorry :(\n";
 
@@ -508,6 +570,15 @@ int main()
             ui.removeSongFromPlaylist(name,artist,title);
 
 
+        }
+
+        std::cout<<"Welcome, Please press corresponding number with choice listed"<<std::endl;
+        std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)Remove Song From Playlist\n 14)QUIT\n";
+        std::cout<<"Please Enter Choice: ";
+        std::getline(std::cin,choice);
+
+        if(choice=="14"){
+            ui.saveFile();
         }
     }
 
