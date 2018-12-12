@@ -18,8 +18,8 @@ public:
     //constructor
     List() {}
 
-    List(const List& listToCopy);
-//    virtual List& operator=(const List& listToCopy)=0;
+    //List(const List& listToCopy);
+//  virtual List& operator=(const List& listToCopy)=0;
 
     //Destructor
     virtual ~List() {}
