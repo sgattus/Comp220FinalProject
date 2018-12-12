@@ -37,7 +37,7 @@ void UserInterFace::add(std::string name, std::string artist, std::string title)
         Song* song=lib->getSong(title);
         p1->addSongToEnd(*song);
         listOfPlaylist->put(*p1);
-        std::cout<<"Added " + title + "to " + name+ " playlist"<<std::endl;
+        std::cout<<"Added " + title + " to " + name+ " playlist"<<std::endl;
 
     }
     catch (std::invalid_argument &e) {
@@ -169,7 +169,7 @@ void UserInterFace::removeSongFromPlaylist(std::string name, std::string artist,
     catch (std::invalid_argument &e) {
         //printAssertEquals("PlayList is not present", e.what());
         ("PlayList is not present");
-        std::cout<<"Sorry Playlist does not exist \n";
+        std::cout<<"Sorry Playlist does not exist :p \n";
         isValid=false;
 
     }
@@ -185,7 +185,7 @@ void UserInterFace::removeSongFromPlaylist(std::string name, std::string artist,
         catch (std::invalid_argument &e) {
 
             ("Song is not in Library");
-            std::cout<<"Song is not in Playlist \n";
+            std::cout<<"Song is not in Playlist :/ \n";
         }
 
     }
@@ -206,77 +206,13 @@ std::string UserInterFace::displaySong(std::string title, std::string artist){
 
 }
 
-void writeFile(){
 
-    // ofstream is used for writing files
-    // We'll make a file called Sample.dat
-    ofstream outf("Sample.dat");
-
-    // If we couldn't open the output file stream for writing
-    if (!outf)
-    {
-        // Print an error and exit
-        cerr << "Uh oh, Sample.dat could not be opened for writing!" << endl;
-        exit(1);
-    }
-
-    // We'll write two lines into this file
-    outf << "This is line 1" << endl;
-    outf << "This is line 2" << endl;
-
-
-
-    // When outf goes out of scope, the ofstream
-    // destructor will close the file
-}
 
 void UserInterFace::saveFile() {
 listOfPlaylist->savePlaylist();
 lib->saveSongs();
 }
 
-void fileReading(){
-    // ifstream is used for reading files
-    // We'll read from a file called Sample.dat
-    ifstream inf("library.dat");
-
-    // If we couldn't open the output file stream for reading
-    if (!inf)
-    {
-        // Print an error and exit
-        cerr << "Uh oh, Sample.dat could not be opened for reading!" << endl;
-        exit(1);
-    }
-
-    // While there's still stuff left to read
-    while (inf)
-    {
-        // read stuff from the file into a string and print it
-        for(int i=0;i<3; i++) {
-            std::string artist;
-            getline(inf, artist);
-            std::string title;
-            getline(inf, title);
-            std::string duration;
-            getline(inf,duration);
-            std::stringstream geek(duration);
-            int x=0;
-            geek>>x;
-            if(artist != "") {
-                Song song(artist, title, x);
-                std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
-            }
-
-        }
-    }
-
-    std::cout<<"done"<<std::endl;
-
-
-
-    // When inf goes out of scope, the ifstream
-    // destructor will close the file
-}
 
 void UserInterFace::import(std::string fileName) {
     // ifstream is used for reading files
@@ -333,20 +269,13 @@ void UserInterFace::import(std::string fileName) {
 
             }
 
-//            if(artist != "" ) {
-//                Song song(artist, title, x);
-//                std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
-//                lib->addSongToEnd(song);
-//
-//                lib->getSong(song.getTitle())->setPlaycount(y);
-//
-//            }
-
 
         }
     }
 
-    std::cout<<"done"<<std::endl;
+    std::cout<<"Library was updated from songs in " + fileName + "\n";
+
+
 
 }
 
@@ -406,8 +335,11 @@ void UserInterFace::startingImport(){
         }
     }
 
-    std::cout<<"done"<<std::endl;
+std::cout<<"Playlists and Songs with in Playlists updated\n";
+
 }
+
+
 
 void UserInterFace::removePlaylist(std::string name) {
 
@@ -439,7 +371,6 @@ void UserInterFace::removePlaylist(std::string name) {
 
 void UserInterFace::discontinue(std::string fileName){
     // ifstream is used for reading files
-    // We'll read from a file called Sample.dat
     ifstream inf(fileName);
 
     // If we couldn't open the output file stream for reading
@@ -471,20 +402,13 @@ void UserInterFace::discontinue(std::string fileName){
             love>>y;
             if(artist != "") {
                 Song song(artist, title, x);
-                std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
-                this->removeSong(title);
+                std::cout<<this->removeSong(title) + "\n";
 
             }
 
         }
     }
 
-    std::cout<<"done"<<std::endl;
-
-
-
-    // When inf goes out of scope, the ifstream
-    // destructor will close the file
 }
 
 
