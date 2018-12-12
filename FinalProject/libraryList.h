@@ -19,8 +19,8 @@ private:
 public:
     libraryList(std::string name);
 
-//        Playlist(const Playlist& playlistToCopy);
-//        Playlist<T>& operator=(const Playlist<T>& playlistToCopy);
+        libraryList(const libraryList& libraryListToCopy);
+        libraryList& operator=(const libraryList& libraryListToCopy);
     ~libraryList();
     void addSongToEnd(Song& songToAdd);
     void remove(Song songToRemove);

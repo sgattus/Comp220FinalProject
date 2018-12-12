@@ -177,12 +177,69 @@ void testPlayListAssignmentOperator(){
     std::cout<<"Done"<<std::endl;
 }
 
+void LibraryTest()
+{
+    cout<<"LibraryListTest: "<<endl;
+
+    libraryList *library = new libraryList("testLib");
+    Song song1 = Song("Grateful Dead", "Box of Rain", 2);
+    Song song2 = Song("Genesis", "That's All", 2);
+    Song song3 = Song("Men At Work", "Land Down Under", 2);
+    Song song4 = Song("Grateful Dead", "Brown Eyed Women", 4);
+
+    library->addSongToEnd(song1);
+    library->addSongToEnd(song2);
+    library->addSongToEnd(song3);
+    library->addSongToEnd(song4);
+    cout << "LibraryList.put, LibraryList.containsKey and LibraryList.get Test: " << endl;
+    printAssertEquals("Box of Rain", library->getSong("Box of Rain")->getTitle());
+    printAssertEquals("Land Down Under", library->getSong("Land Down Under")->getTitle());
+    try {
+        library->getSong("nothing");
+        std::cout << "FAIL: get did not throw exception" << std::endl;
+    }
+    catch (std::invalid_argument &e) {
+        printAssertEquals("Song is not present", e.what());
+    }
+
+    cout << "Songs Sorted in Alphabetical Order by Artist Test : ";
+    printAssertEquals(
+            "ARTIST1: Genesis: That's All, ARTIST2: Grateful Dead: Box of Rain, Brown Eyed Women, ARTIST3: Men At Work: Land Down Under",
+            library->display());
+    std::cout << "--done--" << std::endl;
+}
+
+void testLibraryCopyConstructor(){
+    cout<<"Library Copy Constructor Test: "<<endl;
+    libraryList LibraryToTest=libraryList("TestLibToCopy");
+    Song song1 = Song("Grateful Dead", "Box of Rain", 2);
+    Song song2 = Song("Genesis", "That's All", 2);
+    Song song3 = Song("Men At Work", "Land Down Under", 2);
+    Song song4 = Song("Grateful Dead", "Brown Eyed Women", 4);
+    LibraryToTest.addSongToEnd(song1);
+    LibraryToTest.addSongToEnd(song2);
+
+    libraryList copyMap= libraryList (LibraryToTest);
+    printAssertEquals("Box of Rain", copyMap.getSong("Box of Rain")->getTitle());
+    printAssertEquals("That's All", copyMap.getSong("That's All")->getTitle());
+    copyMap.addSongToEnd(song3);
+    LibraryToTest.addSongToEnd(song4);
+    printAssertEquals("Land Down Under", copyMap.getSong("Land Down Under")->getTitle());
+    printAssertEquals("Brown Eyed Women", LibraryToTest.getSong("Brown Eyed Women")->getTitle());
+    cout<<"--done--"<<endl;
+
+}
+
 int main()
 {
     PlayListTest();
     testPlayListAssignmentOperator();
     testPlayListCopyConstructor();
-    cout<<"--Kelsey's Playlist testDone--"<<endl;
+    cout<<"--Kelsey's Playlist Test Done--"<<endl;
+    LibraryTest();
+    cout<<"--Library Test Done--"<<endl;
+    testLibraryCopyConstructor();
+    cout<<"--Library Copy Constructor Test Done--"<<endl;
     return 0;
 }
 
