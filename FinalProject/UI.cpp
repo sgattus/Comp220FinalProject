@@ -251,6 +251,38 @@ listOfPlaylist->savePlaylist();
 }
 
 
+void help(){
+    std::cout<<" "<<std::endl;
+    std::cout<<"ALL AVAILABLE COMMANDS:"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"1: displayLibrary (Display all songs in alphabetical order by artist (within artist alphabetical by song))"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"2: displayPlayList (Display PlayList)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"3: displayAllPlaylist (Display all of the playlists)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"4: displayArtist (Display all songs for given artist)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"5: displaySong (Display all songs for given artist)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"6: import (Add all songs from the given file to the library)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"7: discontinue (Remove all songs from the given file from the library. Also remove these songs from any playlist in which they occur)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"8: neW (Make a new empty playlist with the given name)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"9: add (Add the given song to the end of the given playlist)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"10: playNext (Print all information about the next song to be played from the given playlist and removes that song from the given playlist)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"11: newRandom (Make a new playlist with the given name, and populate it with a random group of songs that do not repeat within the playlist)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"12: quit (Saves the library and all playlists and terminates execution)"<<std::endl;
+    std::cout<<" "<<std::endl;
+    std::cout<<"To pick a command, enter the command's corresponding number!"<<std::endl;
+
+
+}
 
 
 

@@ -339,10 +339,6 @@ void RandomPlaylist::clearList(){
 
 }
 
-Song RandomPlaylist::randomSong(){
-
-}
-
 void RandomPlaylist::goThroughList(std::string name){
     LinkedNode<Song>* temp=head;
     while(temp!= nullptr){

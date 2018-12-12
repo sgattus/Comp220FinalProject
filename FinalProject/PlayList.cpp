@@ -180,10 +180,6 @@ int Playlist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries){
 
 }
 
-Song Playlist::randomSong(){
-
-}
-
 void Playlist::goThroughList(std::string name){
     LinkedNode<Song>* temp=head;
     while(temp!= nullptr){

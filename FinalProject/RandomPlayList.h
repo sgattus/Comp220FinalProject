@@ -58,15 +58,12 @@ public:
      */
     std::string getName();
 
-    Song randomSong();
 
     Song getSong(std::string song);
     /**
     *
     */
     int getDuration();
-
-    int fillRP(List* p, int maxDuration, Song& songToAdd, int tries);
 
     void clearList();
 

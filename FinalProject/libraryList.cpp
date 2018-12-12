@@ -262,7 +262,6 @@ Song libraryList::randomSong(){
     for (int i=1; i<nodeNum; i++){
         temp=temp->getNext();
     }
-
     return *temp->getItem();
 }
 
