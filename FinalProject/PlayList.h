@@ -69,11 +69,11 @@ public:
 
     int fillRP(List* p, int maxDuration, Song& songToAdd, int tries);
 
-    Song randomSong();
-
     void goThroughList(std::string name);
 
     void saveSongs(std::string fileName);
+
+    bool findSong(std::string title);
 
 
 

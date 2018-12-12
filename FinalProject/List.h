@@ -61,14 +61,13 @@ public:
     //needs to be inherently called in rand play
     virtual  int fillRP(List* p, int maxDuration, Song& songToAdd, int tries)=0;
 
-    //needs to be inherently called in rand play
-    virtual Song randomSong()=0;
-
     virtual int getDuration()=0;
 
     virtual void goThroughList(std::string name)=0;
 
     virtual void saveSongs(std::string fileName)=0;
+
+    virtual bool findSong(std::string title)=0;
 
 
 

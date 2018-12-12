@@ -272,6 +272,19 @@ Song RandomPlaylist::playNextSong(){
 }
 
 
+bool RandomPlaylist::findSong(std::string title){
+        LinkedNode<Song> *temp = head;
+        for (int i = 0; i < size; i++) {
+            if (temp->getItem()->getTitle() == title) {
+                return true;
+            }
+            temp = temp->getNext();
+        }
+
+        return false;
+}
+
+
 std::string RandomPlaylist::display(){
     LinkedNode<Song>* temp=head;
     std::string playlistString="";
@@ -300,12 +313,14 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
     LinkedNode<Song>* newNode= new LinkedNode<Song>();
     newNode->setItem(songToAdd);
 
+    bool inPlaylist= p->findSong(songToAdd.getTitle());
 
-    //checks that it won't go over the maxDuration
-    if(songToAdd.getDuration()+duration>maxDuration){
+    //checks that it won't go over the maxDuration and the song isn't in there already
+    if(songToAdd.getDuration()+duration>maxDuration || inPlaylist==true){
         return tries+1;
 
     }
+
     else {
         //0 nodes
         if (isEmpty()) {
@@ -336,10 +351,6 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
 }
 
 void RandomPlaylist::clearList(){
-
-}
-
-Song RandomPlaylist::randomSong(){
 
 }
 

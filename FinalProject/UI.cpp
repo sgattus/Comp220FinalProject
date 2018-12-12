@@ -105,14 +105,6 @@ void UserInterFace::neWRandomPlayList(std::string name, int duration){
         p1->calcDuration();
     }
 
-
-//    while(p1->getDuration()<700 && tries<3){
-//        Song songToAdd= lib->randomSong();
-//        tries=p1->fillRP(p1, 700, songToAdd, tries);
-//        p1->calcDuration();
-//    }
-
-
     listOfPlaylist->put(*p1);
     std::cout<<"New Random Playlist made: " + name + "\n";
 

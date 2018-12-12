@@ -58,8 +58,6 @@ public:
      */
     std::string getName();
 
-    Song randomSong();
-
     Song getSong(std::string song);
     /**
     *
@@ -73,6 +71,8 @@ public:
     void goThroughList(std::string name);
 
     void saveSongs(std::string fileName);
+
+    bool findSong(std::string title);
 };
 
 
