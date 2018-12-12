@@ -35,7 +35,7 @@ public:
     void saveFile();
     void import(std::string fileName);
     void startingImport();
-    void userImport(std::string fileName);
+    void removePlaylist(std::string name);
 
 
 

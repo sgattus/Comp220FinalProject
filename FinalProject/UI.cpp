@@ -17,13 +17,6 @@ UserInterFace::UserInterFace(){
     listOfPlaylist= new PlayListMap();
     lib= new libraryList("Library");
 
-//    Song song1 = Song("Grateful Dead", "Box of Rain", 2);
-//    Song song2 = Song("Genesis", "That's All", 2);
-//    Song song3 = Song("Men At Work", "Land Down Under", 2);
-//    Song song4 = Song("Grateful Dead", "Brown Eyed Women", 4);
-//    Song song5 = Song("KerryAnne Buckman","Lullaby #5", 5);
-//    Song song6 = Song("Kelsey Grant","I Was Born In A Tree",7);
-//    Song song7 = Song("Ween", "It's Gonna Be Alright Baby",9);
 
 }
 
@@ -415,6 +408,33 @@ void UserInterFace::startingImport(){
     std::cout<<"done"<<std::endl;
 }
 
+void UserInterFace::removePlaylist(std::string name) {
+
+    try {
+        listOfPlaylist->get(name);
+        listOfPlaylist->removePlayList(name);
+        std::string str= name+".dat";
+        char *cstr = new char[str.length() + 1];
+        strcpy(cstr, str.c_str());
+        if( remove( cstr ) != 0 ) {
+            perror("Error deleting file");
+        }
+        else {
+            puts("File successfully deleted");
+        }
+        std::cout << "Playlist " + name + " is removed!" << std::endl;
+
+    }
+    catch (std::invalid_argument &e) {
+        //printAssertEquals("PlayList is not present", e.what());
+        ("PlayList is not present");
+        std::cout<<"Sorry Playlist does not exsist";
+
+    }
+
+
+}
+
 
 
 
@@ -437,7 +457,7 @@ int main()
     std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)Remove Song From Playlist\n 14)Import\n 15)QUIT\n";
     std::cout<<"Please Enter Choice: ";
     std::getline(std::cin,choice);
-    while(choice!="15"){
+    while(choice!="16"){
         if(choice=="1"){
             std::cout<<"Not implemented yet, sorry :(\n";
 
@@ -564,13 +584,21 @@ int main()
             ui.import(file);
         }
 
+        else if(choice=="15"){
+            std::string name;
+            std::cout<<"Please enter Playlist name: ";
+            std::getline(std::cin, name);
+            ui.removePlaylist(name);
+
+        }
+
         std::cout<<"\n";
         std::cout<<"Welcome, Please press corresponding number with choice listed"<<std::endl;
         std::cout<<" 1) HELP\n 2)Display Library\n 3)Display Playlist\n 4)Remove Song From Everything\n 5)Add Song From Library to Playlist\n 6)Add Song to Library\n 7)Play Next Song in Playlist\n 8)Display All Playlist\n 9)Display Artist\n 10)Display Song Info\n 11)Make New Playlist\n 12)Make New Random Playlist\n 13)Remove Song From Playlist\n 14)Import\n 15)QUIT\n";
         std::cout<<"Please Enter Choice: ";
         std::getline(std::cin,choice);
 
-        if(choice=="15"){
+        if(choice=="16"){
             ui.saveFile();
         }
     }
