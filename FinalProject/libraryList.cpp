@@ -68,11 +68,23 @@ void libraryList::remove(Song songToRemove) {
         }
 
 
-        LinkedNode<Song> *tempNode = temp->getNext();
-        temp->setNext(temp->getNext()->getNext());
-        size -= 1;
-        delete tempNode;
-        tempNode = nullptr;
+        if(temp->getNext()==end){
+            LinkedNode<Song> *tempNode = temp->getNext();
+            temp->setNext(nullptr);
+            end=temp;
+            delete tempNode;
+            tempNode= nullptr;
+            size -=1;
+
+        }
+        else {
+            LinkedNode<Song> *tempNode = temp->getNext();
+            temp->setNext(temp->getNext()->getNext());
+
+            size -= 1;
+            delete tempNode;
+            tempNode = nullptr;
+        }
     }
 }
 
