@@ -66,12 +66,23 @@ void Playlist::remove(Song songToRemove) {
             i += 1;
         }
 
+        if(temp->getNext()==end){
+            LinkedNode<Song> *tempNode = temp->getNext();
+            temp->setNext(nullptr);
+            end=temp;
+            delete tempNode;
+            tempNode= nullptr;
+            size -=1;
 
-        LinkedNode<Song> *tempNode = temp->getNext();
-        temp->setNext(temp->getNext()->getNext());
-        size -= 1;
-        delete tempNode;
-        tempNode = nullptr;
+        }
+        else {
+            LinkedNode<Song> *tempNode = temp->getNext();
+            temp->setNext(temp->getNext()->getNext());
+
+            size -= 1;
+            delete tempNode;
+            tempNode = nullptr;
+        }
     }
 }
 
