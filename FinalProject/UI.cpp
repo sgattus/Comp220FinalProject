@@ -314,7 +314,7 @@ void UserInterFace::import(std::string fileName) {
     while (inf)
     {
         // read stuff from the file into a string and print it
-        for(int i=0;i<3; i++) {
+        for(int i=0;i<4; i++) {
             std::string artist;
             getline(inf, artist);
             std::string title;
@@ -324,10 +324,18 @@ void UserInterFace::import(std::string fileName) {
             std::stringstream geek(duration);
             int x=0;
             geek>>x;
+            std::string playcount;
+            getline(inf,playcount);
+            std::stringstream love(playcount);
+            int y=0;
+            love>>y;
             if(artist != "") {
                 Song song(artist, title, x);
                 std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
                 lib->addSongToEnd(song);
+
+                lib->getSong(song.getTitle())->setPlaycount(y);
+
             }
 
         }

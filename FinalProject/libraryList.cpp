@@ -318,6 +318,7 @@ void libraryList::saveSongs(){
         outf << temp->getItem()->getArtist() << endl;
         outf << temp->getItem()->getTitle() << endl;
         outf << std::to_string(temp->getItem()->getDuration()) << endl;
+        outf << std::to_string(temp->getItem()->getPlayCount()) << endl;
         temp=temp->getNext();
 
 

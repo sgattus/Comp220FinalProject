@@ -23,6 +23,7 @@ public:
     Song(std::string artistIn,std::string titleIn, int durationIn);
 
     std::string getArtist();
+    void setPlaycount(int playcount);
     std::string getTitle();
     int getDuration();
     int getPlayCount();
