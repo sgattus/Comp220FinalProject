@@ -3,4 +3,4 @@ project(FinalProject)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(FinalProject main.cpp Song.cpp UserInterFace.cpp TestLib.cpp PlayList.cpp RandomPlayList.cpp)
+add_executable(FinalProject libraryList.cpp PlayListMap.cpp Song.cpp UI.cpp TestLib.cpp PlayList.cpp RandomPlayList.cpp)

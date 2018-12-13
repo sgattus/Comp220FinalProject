@@ -52,3 +52,7 @@ int Song::getPlayCount() {
 void Song::playSong(){
     playcount +=1;
 }
+
+void Song::setPlaycount(int playcount){
+    this->playcount=playcount;
+}

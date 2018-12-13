@@ -4,17 +4,17 @@
 #include <string>
 #include "LinkedNode.h"
 #include "Map.h"
-#include "LibraryMap.h"
+
 #include "PlayList.h"
 #include "RandomPlayList.h"
 
-template <class T>
-class PlayListMap: public Map<T>{
+
+class PlayListMap: public Map{
 private:
     LinkedNode<List> *head;
     LinkedNode<List>  *end;
     //acess to the library
-    LibraryMap<Song> *libray;
+
 
     int size;
 
@@ -45,7 +45,7 @@ public:
    *Add Play List to map of playlists
    */
 
-    void setLibrary(LibraryMap<Song> lib);
+
     void put(List& value);
 
 
@@ -78,12 +78,18 @@ public:
       */
       void removePlayList(std::string name);
 
-      LibraryMap<Song>* getLibrary();
+
+
+    Song playNext(std::string name);
+
+    void goThrough(std::string name);
+
+    void savePlaylist();
 
 
 
 };
 
-#include "PlayListMap.inl"
+
 
 #endif //LINKEDLISTMAP_H
