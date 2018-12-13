@@ -223,7 +223,7 @@ void UserInterFace::import(std::string fileName) {
     if (!inf)
     {
         // Print an error and exit
-        cerr << "Uh oh," + fileName + ".dat could not be opened for reading!" << endl;
+        cerr << "Uh oh," + fileName + " could not be opened for reading!" << endl;
 
 
     }
@@ -377,7 +377,7 @@ void UserInterFace::discontinue(std::string fileName){
     if (!inf)
     {
         // Print an error and exit
-        cerr << "Uh oh, Sample.dat could not be opened for reading!" << endl;
+        cerr << "Uh oh, " +  fileName +" could not be opened for reading!" << endl;
 
     }
 
