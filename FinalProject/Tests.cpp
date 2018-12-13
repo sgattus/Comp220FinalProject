@@ -11,6 +11,7 @@
 #include "PlayListMap.h"
 #include "TestLib.h"
 #include "PlayList.h"
+#include "UI.h"
 
 void PlayListTest(){
 
@@ -191,7 +192,7 @@ void LibraryTest()
     library->addSongToEnd(song2);
     library->addSongToEnd(song3);
     library->addSongToEnd(song4);
-    cout << "LibraryList.put, LibraryList.containsKey and LibraryList.get Test: " << endl;
+    cout << "Library.addSongToEnd,  Library.getSong Test: " << endl;
     printAssertEquals("Box of Rain", library->getSong("Box of Rain")->getTitle());
     printAssertEquals("Land Down Under", library->getSong("Land Down Under")->getTitle());
     try {
@@ -265,8 +266,182 @@ void testLibraryAssignmentOperator(){
 
 }
 
+void PlayListMapTest()
+{
+    cout<<"PlayListMapTest: "<<endl;
+
+    libraryList *library = new libraryList("testLib");
+    Song song1 = Song("Grateful Dead", "Box of Rain", 2);
+    Song song2 = Song("Genesis", "That's All", 2);
+    Song song3 = Song("Men At Work", "Land Down Under", 2);
+    Song song4 = Song("Grateful Dead", "Brown Eyed Women", 4);
+
+    library->addSongToEnd(song1);
+    library->addSongToEnd(song2);
+    library->addSongToEnd(song3);
+    library->addSongToEnd(song4);
+    cout << "Library.addSongToEnd,  Library.getSong Test: " << endl;
+    printAssertEquals("Box of Rain", library->getSong("Box of Rain")->getTitle());
+    printAssertEquals("Land Down Under", library->getSong("Land Down Under")->getTitle());
+    try {
+        library->getSong("nothing");
+        std::cout << "FAIL: get did not throw exception" << std::endl;
+    }
+    catch (std::invalid_argument &e) {
+        printAssertEquals("Song is not present", e.what());
+    }
+
+    cout << "Songs Sorted in Alphabetical Order by Artist Test : ";
+    printAssertEquals(
+            "ARTIST1: Genesis: That's All, ARTIST2: Grateful Dead: Box of Rain, Brown Eyed Women, ARTIST3: Men At Work: Land Down Under",
+            library->display());
+
+
+    PlayListMap* p = new PlayListMap();
+    List* playlist1= new Playlist("playList 1");
+    p->put(*playlist1);
+    cout<<"Test PlayLisMap.get(), PlayListMap.put, and PlayListMap.containsKey: "<<endl;
+    printAssertEquals("playList 1", p->get("playList 1")->getName());
+
+
+    List* p1=p->get("playList 1");
+    p1->addSongToEnd(song1);
+    p1->addSongToEnd(song2);
+
+
+    printAssertEquals(song1.getTitle(),p1->getSong(song1.getTitle()).getTitle());
+    printAssertEquals(song2.getTitle(),p1->getSong(song2.getTitle()).getTitle());
+
+    List* playlist2= new Playlist("sonya");
+    playlist2->addSongToEnd(song1);
+    p->put(*playlist2);
+    printAssertEquals(song1.getTitle(),p->get("sonya")->getSong(song1.getTitle()).getTitle());
+
+    p->get("sonya")->addSongToEnd(song2);
+
+    printAssertEquals("That's All",p->get("sonya")->getSong("That's All").getTitle());
+    std::cout << "--done--" << std::endl;
+    p->get("sonya")->remove(song2);
+
+    try {
+        printAssertEquals("That's All",p->get("sonya")->getSong("That's All").getTitle());
+        std::cout << "FAIL: get did not throw exception" << std::endl;
+    }
+    catch (std::invalid_argument &e) {
+        printAssertEquals("Song is not present", e.what());
+    }
+
+}
+
+void randomPlaylistTest(){
+
+    libraryList* lib= new libraryList("Library");
+
+    Song song1 = Song("Grateful Dead", "Box of Rain", 2);
+    Song song2 = Song("Genesis", "That's All", 2);
+    Song song3 = Song("Men At Work", "Land Down Under", 2);
+    Song song4 = Song("Grateful Dead", "Brown Eyed Women", 4);
+    Song song5 = Song("KerryAnne Buckman","Lullaby #5", 5);
+    Song song6 = Song("Kelsey Grant","I Was Born In A Tree",7);
+    Song song7 = Song("Ween", "It's Gonna Be Alright Baby",9);
+
+    lib->addSongToEnd(song1);
+    lib->addSongToEnd(song2);
+    lib->addSongToEnd(song3);
+    lib->addSongToEnd(song4);
+    lib->addSongToEnd(song5);
+    lib->addSongToEnd(song6);
+    lib->addSongToEnd(song7);
+
+    std::cout<<"Make New Random Playlist\n";
+
+    int tries=0;
+    List* p1= new RandomPlaylist("yeah", 50);
+    while(p1->getDuration()<50 && tries<3){
+        Song songToAdd= lib->randomSong();
+        tries=p1->fillRP(p1, 50, songToAdd, tries);
+        p1->calcDuration();
+    }
+    std::cout<<p1->display()<<std::endl;
+
+    std::cout<<"adding songs"<<std::endl;
+    Song s= Song("Grace Dury", "Ping the Pong in the DING DONG", 300);
+    p1->addSongToEnd(s);
+    Song s1 = Song("Lady Gaga", "Poker Face", 200);
+    p1->addSongToEnd(s1);
+    Song s2 = Song("Sia", "Chandelier", 200);
+    p1->addSongToEnd(s2);
+    Song s3 = Song("Kelsey-Ryan Elizabeth-Lily Grant", "i was born in a tree", 500);
+    p1->addSongToEnd(s3);
+    Song s4 = Song("Sonart Robitussin Guhtaytus", "it's been a coon's age", 50);
+    p1->addSongToEnd(s4);
+    Song s5 = Song("Katherine Louise Polley", "EP: drownin in pussy", 1000);
+    p1->addSongToEnd(s5);
+    Song s6 = Song("Kerry Anne Buckman", "Lullaby #5", 5);
+    p1->addSongToEnd(s6);
+    p1->calcDuration();
+    printAssertEquals(1955, p1->getDuration());
+    Song s7=Song("Artist", "Song Name", 200);
+    p1->addSongToEnd(s7);
+    p1->calcDuration();
+    printAssertEquals(2155, p1->getDuration());
+    std::cout<<"removing a song"<<std::endl;
+    p1->remove(s7);
+    p1->calcDuration();
+    printAssertEquals(1955, p1->getDuration());
+    printAssertEquals(s1.getTitle(),p1->getSong(s1.getTitle()).getTitle());
+    printAssertEquals(s2.getTitle(),p1->getSong(s2.getTitle()).getTitle());
+    printAssertEquals("yeah", p1->getName());
+    p1->calcDuration();
+    std::cout<<p1->getDuration()<<std::endl;
+    std::cout<<p1->display()<<std::endl;
+    std::cout<<"removes drownin in pussy"<<std::endl;
+    p1->remove(s5);
+    p1->calcDuration();
+    std::cout<<p1->display()<<std::endl;
+    std::cout<<p1->getDuration()<<std::endl;
+}
+
+//void TestingUI(){
+//    UserInterFace ui=UserInterFace();
+//
+//        ui.neW("p1");
+//    ui.neWRandomPlayList("Pump Up Jams", 20);
+//    std::cout<<ui.diplayPlaylist("Pump Up Jams") + "\n";
+//    ui.playNext("Pump Up Jams");
+//    ui.playNext("Pump Up Jams");
+//    ui.neW("p2");
+//    ui.add("p2","Genesis","That's All");
+//    ui.add("p1","Genesis","That's All");
+//    ui.playNext("p2");
+//    std::cout<<ui.displayLibrary();
+//    ui.add("p1","Men At Work","Land Down Under");
+//    ui.add("p1","Ween", "It's Gonna Be Alright Baby");
+//    ui.add("p1","KerryAnne Buckman","Lullaby #5");
+//    ui.add("p1","Kelsey Grant","I Was Born In A Tree");
+//    ui.playNext("p1");
+//    ui.neWRandomPlayList("My Faves",20);
+//    ui.playNext("My Faves");
+//    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+//    std::cout<<ui.displayLibrary()<<std::endl;
+//    std::cout<<ui.displayAllPlaylist()<<std::endl;
+//    ui.playNext("p1");
+//    std::cout<<ui.displayLibrary()<<std::endl;
+//    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+//    std::cout<<ui.removeSong("Lullaby #5")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+//    std::cout<<ui.displayLibrary()<<std::endl;
+//
+//    std::cout<<"User Interface Test Done"<<std::endl;
+//}
+
+
 int main()
 {
+    srand(time(NULL));
     PlayListTest();
     testPlayListAssignmentOperator();
     testPlayListCopyConstructor();
@@ -277,6 +452,12 @@ int main()
     cout<<"--Library Copy Constructor Test Done--"<<endl;
     testLibraryAssignmentOperator();
     cout<<"--Library Assignment Operator Test Done--"<<endl;
+    PlayListMapTest();
+    std::cout << "--PlayListMap Test Done--" << std::endl;
+    randomPlaylistTest();
+    std::cout<<"--Random PlayListTest Done--"<<std::endl;
+    //TestingUI();
+    std::cout<<"Done with Tests"<<std::endl;
     return 0;
 }
 
