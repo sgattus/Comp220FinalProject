@@ -1,5 +1,5 @@
-#ifndef PLAYLIST_H
-#define PLAYLIST_H
+#ifndef LIBRARYLIST_H
+#define LIBRARYLIST_H
 
 #include <string>
 #include "LinkedNode.h"
@@ -7,7 +7,7 @@
 #include "List.h"
 
 
-class Playlist: public List {
+class libraryList {
 private:
     LinkedNode<Song> *head;
     LinkedNode<Song>  *end;
@@ -17,14 +17,15 @@ private:
     int size;
 
 public:
-    Playlist(std::string name);
+    libraryList(std::string name);
 
-    Playlist(const Playlist& playlistToCopy);
-    Playlist& operator=(const Playlist& playlistToCopy);
-    ~Playlist();
+        libraryList(const libraryList& libraryListToCopy);
+        libraryList& operator=(const libraryList& libraryListToCopy);
+    ~libraryList();
     void addSongToEnd(Song& songToAdd);
     void remove(Song songToRemove);
-    Song getSong(std::string title);
+    Song* getSong(std::string title);
+    Song randomSong();
 
     /**
      * These are commited out for my test to run since they do not have definitions yet
@@ -38,7 +39,7 @@ public:
     * •	return a string representing all songs in the playlist
     */
 
-    //Committed out for testing purposes
+
     std::string display();
 
     /**
@@ -50,6 +51,7 @@ public:
    *play next song, returning song info and removing it from playlist (playnext)
      * Through exception if no more songs
     **/
+    //not sure yet what I want to do with this
     Song playNextSong();
 
     /**
@@ -67,13 +69,13 @@ public:
 
     int getDuration();
 
-    int fillRP(List* p, int maxDuration, Song& songToAdd, int tries);
 
-    Song randomSong();
 
     void goThroughList(std::string name);
 
-    void saveSongs(std::string fileName);
+    std::string displayArtist(std::string artist);
+
+    void saveSongs();
 
 
 

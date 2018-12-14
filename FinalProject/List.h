@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include <string>
 #include "Song.h"
+#include <fstream>
+#include <cstdlib> // for exit()
+using namespace std;
 
 class List {
 private:
@@ -15,13 +18,13 @@ public:
     //constructor
     List() {}
 
-//    List(const List& listToCopy);
+    List(const List& listToCopy);
 //    virtual List& operator=(const List& listToCopy)=0;
 
     //Destructor
     virtual ~List() {}
 
-     virtual void addSongToEnd(Song songToAdd)=0;
+     virtual void addSongToEnd(Song& songToAdd)=0;
      virtual void remove(Song songToRemove)=0;
     /**
     * Display all the names of the playlist and their durations
@@ -54,6 +57,20 @@ public:
      *
      */
     virtual std::string getName()=0;
+
+    //needs to be inherently called in rand play
+    virtual  int fillRP(List* p, int maxDuration, Song& songToAdd, int tries)=0;
+
+    //needs to be inherently called in rand play
+    virtual Song randomSong()=0;
+
+    virtual int getDuration()=0;
+
+    virtual void goThroughList(std::string name)=0;
+
+    virtual void saveSongs(std::string fileName)=0;
+
+
 
 
 

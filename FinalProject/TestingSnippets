@@ -1,0 +1,31 @@
+UI Testing
+
+//    ui.neW("p1");
+//    ui.neWRandomPlayList("Pump Up Jams", 20);
+//    std::cout<<ui.diplayPlaylist("Pump Up Jams") + "\n";
+//    ui.playNext("Pump Up Jams");
+//    ui.playNext("Pump Up Jams");
+//    ui.neW("p2");
+//    ui.add("p2","Genesis","That's All");
+//    ui.add("p1","Genesis","That's All");
+//    ui.playNext("p2");
+//    std::cout<<ui.displayLibrary();
+//    ui.add("p1","Men At Work","Land Down Under");
+//    ui.add("p1","Ween", "It's Gonna Be Alright Baby");
+//    ui.add("p1","KerryAnne Buckman","Lullaby #5");
+//    ui.add("p1","Kelsey Grant","I Was Born In A Tree");
+//    ui.playNext("p1");
+//    ui.neWRandomPlayList("My Faves",20);
+//    ui.playNext("My Faves");
+//    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+//    std::cout<<ui.displayLibrary()<<std::endl;
+//    std::cout<<ui.displayAllPlaylist()<<std::endl;
+//    ui.playNext("p1");
+//    std::cout<<ui.displayLibrary()<<std::endl;
+//    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+//    std::cout<<ui.removeSong("Lullaby #5")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("p1")<<std::endl;
+//    std::cout<<ui.diplayPlaylist("My Faves")<<std::endl;
+//    std::cout<<ui.displayLibrary()<<std::endl;
