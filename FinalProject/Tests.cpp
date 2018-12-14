@@ -335,6 +335,8 @@ void PlayListMapTest()
 
 void randomPlaylistTest(){
 
+    std::cout<<"---random playlist tests---"<<std::endl;
+
     libraryList* lib= new libraryList("Library");
 
     Song song1 = Song("Grateful Dead", "Box of Rain", 2);

@@ -89,28 +89,34 @@ std::string UserInterFace::displayLibrary(){
 void UserInterFace::neWRandomPlayList(std::string name, int duration){
     std::cout<<"Make New Random Playlist\n";
     lib->calcDuration();
-    if(lib->getDuration()<duration) {
-        std::cout << "There is not enough songs in the library to make a playlist with a duration this high"
-                  << std::endl;
+    if(lib->getDuration()<duration){
+        std::cout<<"There is not enough songs in the library to make a playlist with a duration this high"<<std::endl;
+
     }
     else {
-            int tries = 0;
-            List *p1 = new RandomPlaylist(name, duration);
-            while (p1->getDuration() < duration && tries < 3) {
-                Song songToAdd = lib->randomSong();
-                try {
-                    p1->getSong(songToAdd.getTitle());
-                }
-                catch (std::invalid_argument &e) {
-                    ("Song is not present");
-                    tries = p1->fillRP(p1, duration, songToAdd, tries);
-                    p1->calcDuration();
-                }
-            }
-            listOfPlaylist->put(*p1);
-            std::cout << "New Random Playlist made: " + name + "\n";
-    }
+        int tries = 0;
+        List *p1 = new RandomPlaylist(name, duration);
+        while (p1->getDuration() < duration && tries < 3) {
+            Song songToAdd = lib->randomSong();
 
+            try {
+                p1->getSong(songToAdd.getTitle());
+
+
+            }
+            catch (std::invalid_argument &e) {
+
+                ("Song is not present");
+                tries = p1->fillRP(p1, duration, songToAdd, tries);
+                p1->calcDuration();
+
+            }
+
+        }
+
+        listOfPlaylist->put(*p1);
+        std::cout << "New Random Playlist made: " + name + "\n";
+    }
 
 
 
