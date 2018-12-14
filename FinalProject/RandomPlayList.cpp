@@ -313,10 +313,11 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
     LinkedNode<Song>* newNode= new LinkedNode<Song>();
     newNode->setItem(songToAdd);
 
+    //checks to see if the song is in the playlist
     bool inPlaylist= p->findSong(songToAdd.getTitle());
 
     //checks that it won't go over the maxDuration and the song isn't in there already
-    if(songToAdd.getDuration()+duration>maxDuration || inPlaylist==true){
+    if(songToAdd.getDuration()+duration>maxDuration || inPlaylist){
         return tries+1;
 
     }
@@ -331,14 +332,14 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
         else {
             //checks all the songs in the playlist to make sure that it isn't a repeated song
             LinkedNode<Song> *temp = head;
-            while (temp->getNext() != nullptr && temp != newNode) {
+            while (temp->getNext() != nullptr && temp->getItem()->getTitle() != newNode->getItem()->getTitle()) {
                 temp = temp->getNext();
             }
 
             //checks last node and adds it if needed. If temp.getNext()!= nullptr that means that
             //there is a repeat in the song. The loop terminates when either temp reaches the end
             //or if the song is found and is already in the list
-            if (temp->getNext() == nullptr && temp != newNode) {
+            if (temp->getNext() != nullptr && temp->getItem()->getTitle() != newNode->getItem()->getTitle()) {
                 addSongToEnd(songToAdd);
             }
             temp = nullptr;
