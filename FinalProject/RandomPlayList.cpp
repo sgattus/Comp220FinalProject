@@ -314,7 +314,10 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
 
     //checks that it won't go over the maxDuration
     if(songToAdd.getDuration()+duration>maxDuration){
-        return tries+1;
+        tries+=1;
+        delete newNode;
+        newNode= nullptr;
+        return tries;
 
     }
     else {
@@ -327,7 +330,7 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
         else {
             //checks all the songs in the playlist to make sure that it isn't a repeated song
             LinkedNode<Song> *temp = head;
-            while (temp->getNext() != nullptr && temp != newNode) {
+            while (temp->getNext() != nullptr && temp->getItem()->getTitle() != newNode->getItem()->getTitle()) {
                 temp = temp->getNext();
             }
 
@@ -337,13 +340,17 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
             if (temp->getNext() == nullptr && temp != newNode) {
                 addSongToEnd(songToAdd);
             }
+
+            else{
+                tries+=1;
+            }
             temp = nullptr;
+            newNode= nullptr;
             return tries;
         }
+        newNode= nullptr;
         return tries;
     }
-
-    newNode= nullptr;
 }
 
 void RandomPlaylist::clearList(){
