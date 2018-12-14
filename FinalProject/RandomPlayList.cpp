@@ -333,7 +333,7 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
             while (temp->getNext() != nullptr && temp->getItem()->getTitle() != newNode->getItem()->getTitle()) {
                 temp = temp->getNext();
             }
-
+//changed statement
             if(end->getItem()->getTitle()==newNode->getItem()->getTitle()){
                 tries+=1;
                 delete newNode;
