@@ -105,7 +105,6 @@ void UserInterFace::neWRandomPlayList(std::string name, int duration){
 
             }
             catch (std::invalid_argument &e) {
-
                 ("Song is not present");
                 tries = p1->fillRP(p1, duration, songToAdd, tries);
                 p1->calcDuration();
