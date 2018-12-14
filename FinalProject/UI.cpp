@@ -101,8 +101,6 @@ void UserInterFace::neWRandomPlayList(std::string name, int duration){
 
             try {
                 p1->getSong(songToAdd.getTitle());
-
-
             }
             catch (std::invalid_argument &e) {
 
@@ -133,7 +131,7 @@ std::string UserInterFace::diplayPlaylist(std::string name){
     catch (std::invalid_argument &e) {
         //printAssertEquals("PlayList is not present", e.what());
         ("PlayList is not present");
-        return "Sorry Playlist does not exsist";
+        return "Sorry Playlist does not exist";
     }
 
 
@@ -378,7 +376,7 @@ void UserInterFace::removePlaylist(std::string name) {
     catch (std::invalid_argument &e) {
         //printAssertEquals("PlayList is not present", e.what());
         ("PlayList is not present");
-        std::cout<<"Sorry Playlist does not exsist";
+        std::cout<<"Sorry Playlist does not exist";
 
     }
 
@@ -481,7 +479,7 @@ int main()
             std::string artist;
             std::cout<<"Please Enter Song: \n";
             std::getline(std::cin,song);
-            std::cout<<"Please Enter Artitst: \n";
+            std::cout<<"Please Enter Artist: \n";
             std::getline(std::cin,artist);
             std::cout<<"Please Enter Playlist: \n";
             std::getline(std::cin,playlist);
@@ -489,13 +487,13 @@ int main()
         }
 
         else if(choice=="6"){
-            std::cout<<"Please enter Song to add, Artitst, and Duration \n";
+            std::cout<<"Please enter Song to add, Artist, and Duration \n";
             std::string song;
             std::string duration;
             std::string artist;
             std::cout<<"Please Enter Song: \n";
             std::getline(std::cin,song);
-            std::cout<<"Please Enter Artitst: \n";
+            std::cout<<"Please Enter Artist: \n";
             std::getline(std::cin,artist);
             std::cout<<"Please Enter Duration(seconds): \n";
             std::getline(std::cin,duration);

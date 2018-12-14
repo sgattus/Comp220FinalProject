@@ -334,13 +334,20 @@ int RandomPlaylist::fillRP(List* p, int maxDuration, Song& songToAdd, int tries)
                 temp = temp->getNext();
             }
 
+            if(end->getItem()->getTitle()==newNode->getItem()->getTitle()){
+                tries+=1;
+                delete newNode;
+                newNode= nullptr;
+                return tries;
+
+            }
+
             //checks last node and adds it if needed. If temp.getNext()!= nullptr that means that
             //there is a repeat in the song. The loop terminates when either temp reaches the end
             //or if the song is found and is already in the list
             if (temp->getNext() == nullptr && temp != newNode) {
                 addSongToEnd(songToAdd);
             }
-
             else{
                 tries+=1;
             }
