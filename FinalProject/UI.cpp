@@ -96,20 +96,25 @@ void UserInterFace::neWRandomPlayList(std::string name, int duration){
     else {
         int tries = 0;
         List *p1 = new RandomPlaylist(name, duration);
+        std::string song2;
         while (p1->getDuration() < duration && tries < 3) {
             Song songToAdd = lib->randomSong();
+            if(song2!=songToAdd.getTitle()) {
 
-            try {
-                p1->getSong(songToAdd.getTitle());
+                try {
+                    p1->getSong(songToAdd.getTitle());
 
 
+                }
+                catch (std::invalid_argument &e) {
+                    ("Song is not present");
+                    tries = p1->fillRP(p1, duration, songToAdd, tries);
+                    p1->calcDuration();
+
+                }
+                song2 = songToAdd.getTitle();
             }
-            catch (std::invalid_argument &e) {
-                ("Song is not present");
-                tries = p1->fillRP(p1, duration, songToAdd, tries);
-                p1->calcDuration();
-
-            }
+            song2 = songToAdd.getTitle();
 
         }
 
