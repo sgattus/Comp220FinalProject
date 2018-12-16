@@ -21,7 +21,46 @@ UserInterFace::UserInterFace(){
 }
 
 void UserInterFace::help() {
-    
+
+        std::cout<<" "<<std::endl;
+        std::cout<<"ALL AVAILABLE COMMANDS:"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"1: HELP (Displays all commands available to use and their summaries)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"2: Display Library (Display all songs in alphabetical order by artist (within artist alphabetical by song))"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"3: Display PlayList (Display PlayList)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"4:Remove Song From Everything (removes song from all playlists as well as the library)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"5: Add Song From Library to playlist (add a song to a playlist when given the song name, artist name, and the name of the playlist)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"6: Add Song to Library (Adds a song to the library when given the artist, title, and duration)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"7: Play Next Song in Playlist (plays the song in the playlist and then removes it, given the name of the playlist)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"8: displayArtist (Display all songs for given artist)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"9: display Artist (Display all songs for given artist given the artist name)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"10: Display Song (Display all info for a song given the artist name and song title)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"11: New Playlist (creates a new empty playlist)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"12: New Random Playlist (creates a new random playlist under a given certain duration)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"13: Remove Song from Playlist (Removes song from a playlist when given the playlist name, song name, and artist name)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"14: import (Add all songs from the given file to the library)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"15: Remove Playlist (deletes a playlist in its entirety)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"16: discontinue (Remove all songs from the given file from the library. Also remove these songs from any playlist in which they occur)"<<std::endl;
+        std::cout<<" "<<std::endl;
+        std::cout<<"17: QUIT (quits the program, saves all changes made)"<<std::endl;
+        std::cout<<" "<<std::endl;
+
+
 }
 
 void UserInterFace::neW(std::string name){
@@ -127,9 +166,15 @@ void UserInterFace::neWRandomPlayList(std::string name, int duration){
 std::string UserInterFace::diplayPlaylist(std::string name){
     std::cout<<"Display Playlist\n";
 
+
     try {
         listOfPlaylist->get(name);
-        return name + ": "+ listOfPlaylist->get(name)->display();
+        if(listOfPlaylist->get(name)->isEmpty()!=true) {
+            return name + ": " + listOfPlaylist->get(name)->display();
+        }
+        else{
+            return "Nothing in playlist";
+        }
 
     }
     catch (std::invalid_argument &e) {
@@ -456,7 +501,7 @@ int main()
     std::getline(std::cin,choice);
     while(choice!="17"){
         if(choice=="1"){
-            std::cout<<"Not implemented yet, sorry :(\n";
+            ui.help();
 
         }
         else if(choice=="2"){
