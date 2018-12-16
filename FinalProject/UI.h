@@ -37,7 +37,7 @@ public:
     void startingImport();
     void removePlaylist(std::string name);
     void discontinue(std::string fileName);
-
+    void help();
 
 
 
