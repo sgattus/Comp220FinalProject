@@ -20,6 +20,10 @@ UserInterFace::UserInterFace(){
 
 }
 
+void UserInterFace::help() {
+    
+}
+
 void UserInterFace::neW(std::string name){
     std::cout<<"Make New Playlist\n";
     List* playlist= new Playlist(name);
