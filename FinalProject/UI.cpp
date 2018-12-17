@@ -76,47 +76,64 @@ void UserInterFace::add(std::string name, std::string artist, std::string title)
 
     try {
         listOfPlaylist->get(name);
-        List* p1=listOfPlaylist->get(name);
-        Song* song=lib->getSong(title);
-        p1->addSongToEnd(*song);
-        listOfPlaylist->put(*p1);
-        std::cout<<"Added " + title + " to " + name+ " playlist"<<std::endl;
+        List *p1 = listOfPlaylist->get(name);
 
+        try {
+            Song *song = lib->getSong(title);
+            p1->addSongToEnd(*song);
+            listOfPlaylist->put(*p1);
+            std::cout << "Added " + title + " to " + name + " playlist" << std::endl;
+
+        }
+        catch (std::invalid_argument &e) {
+            //printAssertEquals("PlayList is not present", e.what());
+            ("Song is not in Library");
+            std::cout << "Song is not in Library, can't add :( \n";
+
+        }
     }
     catch (std::invalid_argument &e) {
         //printAssertEquals("PlayList is not present", e.what());
-        ("Song is not in Library");
-        std::cout<<"Song is not in Library, can't add :( \n";
-
+        ("PlayList is not present");
+        std::cout<<"Sorry Playlist does not exist\n";
     }
+
 }
 
 void UserInterFace::playNext(std::string name){
     std::cout<<"Play Next Song in Playlist\n";
-    if(listOfPlaylist->get(name)->isEmpty()==true){
-        listOfPlaylist->removePlayList(name);
-        std::cout << "Playlist " + name + " is removed!" << std::endl;
+    try {
+        listOfPlaylist->get(name);
 
-    }
-    else {
 
-        Song song = listOfPlaylist->get(name)->playNextSong();
-        lib->getSong(song.getTitle())->playSong();
-        std::cout << "Song Removed: " + song.getTitle() + " " + song.getArtist() + " " +
-                     std::to_string(song.getDuration()) << std::endl;
         if (listOfPlaylist->get(name)->isEmpty() == true) {
             listOfPlaylist->removePlayList(name);
-            std::string str= name+".dat";
-            char *cstr = new char[str.length() + 1];
-            strcpy(cstr, str.c_str());
-            if( remove( cstr ) != 0 ) {
-                perror("Error deleting file");
-            }
-            else {
-                puts("File successfully deleted");
-            }
             std::cout << "Playlist " + name + " is removed!" << std::endl;
+
+        } else {
+
+            Song song = listOfPlaylist->get(name)->playNextSong();
+            lib->getSong(song.getTitle())->playSong();
+            std::cout << "Song Removed: " + song.getTitle() + " " + song.getArtist() + " " +
+                         std::to_string(song.getDuration()) << std::endl;
+            if (listOfPlaylist->get(name)->isEmpty() == true) {
+                listOfPlaylist->removePlayList(name);
+                std::string str = name + ".dat";
+                char *cstr = new char[str.length() + 1];
+                strcpy(cstr, str.c_str());
+                if (remove(cstr) != 0) {
+                    perror("Error deleting file");
+                } else {
+                    puts("File successfully deleted");
+                }
+                std::cout << "Playlist " + name + " is removed!" << std::endl;
+            }
         }
+    }
+    catch (std::invalid_argument &e) {
+        //printAssertEquals("PlayList is not present", e.what());
+        ("PlayList is not present");
+        std::cout<<"Sorry Playlist does not exist\n";
     }
 
 
