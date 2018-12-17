@@ -566,7 +566,12 @@ int main()
             std::stringstream geek(duration);
             int x=0;
             geek>>x;
-            ui.addSongToLibrary(artist,song,x);
+            if(x>0){
+                ui.addSongToLibrary(artist,song,x);
+            }
+            else{
+                std::cout<<"Incorrect Duration"<<std::endl;
+            }
 
         }
 
@@ -617,7 +622,12 @@ int main()
             std::stringstream geek(duration);
             int x=0;
             geek>>x;
-            ui.neWRandomPlayList(randPlayListName,x);
+            if(x>0) {
+                ui.neWRandomPlayList(randPlayListName, x);
+            }
+            else{
+                std::cout<<"Incorrect Duration"<<std::endl;
+            }
 
         }
 
