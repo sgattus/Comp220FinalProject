@@ -26,7 +26,7 @@ public:
     std::string diplayPlaylist(std::string name);
     std::string displayAllPlaylist();
 
-    std::string removeSong(std::string name);
+    std::string removeSong(std::string name, std::string artist);
 
     void addSongToLibrary(std::string artist, std::string song, int duration);
     std::string displayArtist(std::string artist);

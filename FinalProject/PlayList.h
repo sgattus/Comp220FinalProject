@@ -24,7 +24,7 @@ public:
     ~Playlist();
     void addSongToEnd(Song& songToAdd);
     void remove(Song songToRemove);
-    Song getSong(std::string title);
+    Song getSong(std::string title, std::string artist);
 
     /**
      * These are commited out for my test to run since they do not have definitions yet
@@ -71,7 +71,7 @@ public:
 
     Song randomSong();
 
-    void goThroughList(std::string name);
+    void goThroughList(std::string name, std::string artist);
 
     void saveSongs(std::string fileName);
 

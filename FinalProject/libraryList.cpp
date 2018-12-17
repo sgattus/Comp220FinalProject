@@ -133,17 +133,14 @@ void libraryList::remove(Song songToRemove) {
 
 
 
-std::string libraryList::getName() {
-    return name;
-}
 
 
 
 
-Song* libraryList::getSong(std::string title) {
+Song* libraryList::getSong(std::string title, std::string artist) {
     LinkedNode<Song> *temp = head;
     for (int i = 0; i < size; i++) {
-        if (temp->getItem()->getTitle() == title) {
+        if (temp->getItem()->getTitle() == title && temp->getItem()->getArtist()==artist) {
             return temp->getItem();
         }
         temp = temp->getNext();
@@ -259,19 +256,7 @@ void libraryList::calcDuration(){
     temp = nullptr;
 }
 
-/**
-*play next song, returning song info and removing it from playlist (playnext)
-* Through exception if no more songs
-**/
-Song libraryList::playNextSong(){
-    LinkedNode<Song>* temp= head;
-    Song* song=temp->getItem();
-    head=head->getNext();
-    size -=1;
-    delete temp;
-    return *song;
 
-}
 
 
 
@@ -323,10 +308,10 @@ Song libraryList::randomSong(){
 
 
 
-void libraryList::goThroughList(std::string name){
+void libraryList::goThroughList(std::string name, std::string artist){
     LinkedNode<Song>* temp=head;
     while(temp!= nullptr){
-        if(temp->getItem()->getTitle()==name){
+        if(temp->getItem()->getTitle()==name && temp->getItem()->getArtist()==artist){
             this->remove(*temp->getItem());
             temp= nullptr;
         }

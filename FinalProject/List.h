@@ -38,7 +38,7 @@ public:
     */
     virtual void calcDuration()=0;
 
-    virtual Song getSong(std::string title)=0;
+    virtual Song getSong(std::string title,std::string artist)=0;
 
 
 
@@ -66,7 +66,7 @@ public:
 
     virtual int getDuration()=0;
 
-    virtual void goThroughList(std::string name)=0;
+    virtual void goThroughList(std::string name, std::string artist)=0;
 
     virtual void saveSongs(std::string fileName)=0;
 

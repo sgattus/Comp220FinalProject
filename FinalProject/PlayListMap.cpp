@@ -173,10 +173,10 @@ std::string PlayListMap::display(){
 
 }
 
-void PlayListMap::goThrough(std::string name) {
+void PlayListMap::goThrough(std::string name, std::string artist) {
     LinkedNode<List>* tempList=head;
     while(tempList!= nullptr){
-        tempList->getItem()->goThroughList(name);
+        tempList->getItem()->goThroughList(name, artist);
         tempList=tempList->getNext();
 
     }

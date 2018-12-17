@@ -60,7 +60,7 @@ public:
 
     Song randomSong();
 
-    Song getSong(std::string song);
+    Song getSong(std::string song, std::string artist);
     /**
     *
     */
@@ -70,7 +70,7 @@ public:
 
     void clearList();
 
-    void goThroughList(std::string name);
+    void goThroughList(std::string name, std::string artist);
 
     void saveSongs(std::string fileName);
 };

@@ -24,7 +24,7 @@ public:
     ~libraryList();
     void addSongToEnd(Song& songToAdd);
     void remove(Song songToRemove);
-    Song* getSong(std::string title);
+    Song* getSong(std::string title, std::string artist);
     Song randomSong();
 
     /**
@@ -47,12 +47,6 @@ public:
     */
     void calcDuration();
 
-    /**
-   *play next song, returning song info and removing it from playlist (playnext)
-     * Through exception if no more songs
-    **/
-    //not sure yet what I want to do with this
-    Song playNextSong();
 
     /**
      * •	check if empty
@@ -60,10 +54,7 @@ public:
      */
     bool isEmpty();
 
-    /**
-     *
-     */
-    std::string getName();
+
 
     void clearList();
 
@@ -71,7 +62,7 @@ public:
 
 
 
-    void goThroughList(std::string name);
+    void goThroughList(std::string name, std::string artist);
 
     std::string displayArtist(std::string artist);
 

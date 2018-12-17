@@ -79,7 +79,7 @@ void UserInterFace::add(std::string name, std::string artist, std::string title)
         List *p1 = listOfPlaylist->get(name);
 
         try {
-            Song *song = lib->getSong(title);
+            Song *song = lib->getSong(title, artist);
             p1->addSongToEnd(*song);
             listOfPlaylist->put(*p1);
             std::cout << "Added " + title + " to " + name + " playlist" << std::endl;
@@ -113,7 +113,7 @@ void UserInterFace::playNext(std::string name){
         } else {
 
             Song song = listOfPlaylist->get(name)->playNextSong();
-            lib->getSong(song.getTitle())->playSong();
+            lib->getSong(song.getTitle(),song.getArtist())->playSong();
             std::cout << "Song Removed: " + song.getTitle() + " " + song.getArtist() + " " +
                          std::to_string(song.getDuration()) << std::endl;
             if (listOfPlaylist->get(name)->isEmpty() == true) {
@@ -160,7 +160,7 @@ void UserInterFace::neWRandomPlayList(std::string name, int duration){
             Song songToAdd = lib->randomSong();
 
             try {
-                p1->getSong(songToAdd.getTitle());
+                p1->getSong(songToAdd.getTitle(), songToAdd.getArtist());
             }
             catch (std::invalid_argument &e) {
 
@@ -213,19 +213,19 @@ void UserInterFace::addSongToLibrary(std::string artist, std::string song, int d
     Song newSong = Song(artist, song,duration);
 
     lib->addSongToEnd(newSong);
-    Song* testSong=lib->getSong(song);
+    Song* testSong=lib->getSong(song,artist);
     std::cout<<"Added " + testSong->getTitle() + " by "+ testSong->getArtist() + " with a duration of "+ std::to_string(testSong->getDuration()) + " to library\n";
 }
 
-std::string UserInterFace::removeSong(std::string name){
+std::string UserInterFace::removeSong(std::string name, std::string artist){
     std::cout<<"Remove Song\n";
 
     try {
-        lib->getSong(name)->getTitle();
-        Song* song = lib->getSong(name);
-        lib->goThroughList(name);
+        lib->getSong(name,artist)->getTitle();
+        Song* song = lib->getSong(name,artist);
+        lib->goThroughList(name, artist);
 
-        listOfPlaylist->goThrough(name);
+        listOfPlaylist->goThrough(name, artist);
         return "Song Removed: " + song->getTitle() + ", " + song->getArtist() + ", " + std::to_string(song->getDuration());
 
     }
@@ -257,9 +257,9 @@ void UserInterFace::removeSongFromPlaylist(std::string name, std::string artist,
 
     if(isValid==true){
         try {
-            listOfPlaylist->get(name)->getSong(title).getTitle();
-            Song* song = lib->getSong(title);
-            listOfPlaylist->get(name)->goThroughList(title);
+            listOfPlaylist->get(name)->getSong(title, artist).getTitle();
+            Song* song = lib->getSong(title, artist);
+            listOfPlaylist->get(name)->goThroughList(title, artist);
             std::cout<< "Song Removed: " + song->getTitle() + ", " + song->getArtist() + ", " + std::to_string(song->getDuration()) + "\n";
 
         }
@@ -281,9 +281,21 @@ std::string UserInterFace::displayArtist(std::string artist) {
 
 std::string UserInterFace::displaySong(std::string title, std::string artist){
     std::cout<<"Display Song Info \n";
-    Song* song=lib->getSong(title);
 
-    return song->getTitle() + ": Artist: " + song->getArtist() + " Duration: " + std::to_string(song->getDuration()) + " seconds  PlayCount: " + std::to_string(song->getPlayCount()) + "\n";
+    try {
+        Song* song=lib->getSong(title, artist);
+        return song->getTitle() + ": Artist: " + song->getArtist() + " Duration: " + std::to_string(song->getDuration()) + " seconds  PlayCount: " + std::to_string(song->getPlayCount()) + "\n";
+
+
+    }
+    catch (std::invalid_argument &e) {
+
+        ("Song is not in Library");
+        return "Song is not in Library :/ \n";
+    }
+
+
+
 
 }
 
@@ -329,7 +341,7 @@ void UserInterFace::import(std::string fileName) {
             int y=0;
             love>>y;
             try {
-                lib->getSong(title)->getTitle();
+                lib->getSong(title,artist)->getTitle();
                 std::cout<<"Song " + title + " already in library\n";
 
 
@@ -342,7 +354,7 @@ void UserInterFace::import(std::string fileName) {
                     std::cout << song.getArtist() + ", " + song.getTitle() + ", " + std::to_string(song.getDuration()) + "\n";
                     lib->addSongToEnd(song);
 
-                    lib->getSong(song.getTitle())->setPlaycount(y);
+                    lib->getSong(song.getTitle(),song.getArtist())->setPlaycount(y);
 
 
                 }
@@ -483,7 +495,7 @@ void UserInterFace::discontinue(std::string fileName){
             love>>y;
             if(artist != "") {
                 Song song(artist, title, x);
-                std::cout<<this->removeSong(title) + "\n";
+                std::cout<<this->removeSong(title, artist) + "\n";
 
             }
 
@@ -532,10 +544,13 @@ int main()
 
         }
         else if(choice=="4"){
-            std::cout<<"Please enter song to remove from Playlist(s) and library: \n";
+            std::cout<<"Please enter song title to remove from Playlist(s) and library: \n";
             std::string song;
             std::getline(std::cin,song);
-            std::cout<<ui.removeSong(song) + "\n";
+            std::cout<<"Please enter artist of song to remove from Playlist(s) and library: \n";
+            std::string artist;
+            std::getline(std::cin,artist);
+            std::cout<<ui.removeSong(song,artist) + "\n";
         }
 
         else if(choice=="5"){

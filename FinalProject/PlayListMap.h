@@ -82,7 +82,7 @@ public:
 
     Song playNext(std::string name);
 
-    void goThrough(std::string name);
+    void goThrough(std::string name, std::string artist);
 
     void savePlaylist();
 

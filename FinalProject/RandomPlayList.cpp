@@ -232,10 +232,10 @@ int RandomPlaylist::getDuration(){
 }
 
 
-Song RandomPlaylist::getSong(std::string title) {
+Song RandomPlaylist::getSong(std::string title, std::string artist) {
     LinkedNode<Song> *temp = head;
     for (int i = 0; i < size; i++) {
-        if (temp->getItem()->getTitle() == title) {
+        if (temp->getItem()->getTitle() == title && temp->getItem()->getArtist()==artist) {
             return *temp->getItem();
         }
         temp = temp->getNext();
@@ -368,10 +368,10 @@ Song RandomPlaylist::randomSong(){
 
 }
 
-void RandomPlaylist::goThroughList(std::string name){
+void RandomPlaylist::goThroughList(std::string name, std::string artist){
     LinkedNode<Song>* temp=head;
     while(temp!= nullptr){
-        if(temp->getItem()->getTitle()==name){
+        if(temp->getItem()->getTitle()==name && temp->getItem()->getArtist()==artist){
             this->remove(*temp->getItem());
             temp= nullptr;
         }
